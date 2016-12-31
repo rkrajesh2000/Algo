@@ -1,6 +1,7 @@
 package Algo.Test;
 import java.util.HashMap;
 import java.lang.Math;
+import java.util.TreeMap;
 
 public class Convertor {
 
@@ -8,7 +9,6 @@ public class Convertor {
 
 		System.out.println(convertToZigZag("PAYPALISHIRING", 3));
 		System.out.println(convertToZigZag("INTELISHIRING", 3));
-		
 	}
    
 	public static String convertToZigZag(String s, int numRows) {
@@ -52,5 +52,4 @@ public class Convertor {
 	 
 		return sb.toString();
 	}	
-	
 }
