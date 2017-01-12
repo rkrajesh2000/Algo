@@ -10,6 +10,7 @@ public class NumberAndLetterConvertor {
 		System.out.println(
 		numberToLetters(1)
 		+ ", " + numberToLetters(25)
+		+ ", " + numberToLetters(26)		
 		+ ", " + numberToLetters(27)
         + ", " + numberToLetters(51)
         + ", " + numberToLetters(52)
@@ -21,17 +22,17 @@ public class NumberAndLetterConvertor {
         + ", " + numberToLetters(703)
         );
 
-System.out.println(numberToLetters(704)
-        + ", " + numberToLetters(705)
-        + ", " + numberToLetters(2600)
-        + ", " + numberToLetters(25999)
-        + ", " + numberToLetters(26000)
-        + ", " + numberToLetters(26001)
-		);
-
-System.out.println("");
-System.out.println("Convert Numbers to Letters");
-System.out.println("ALLA = " + lettersToNumber("ALLA"));		
+		System.out.println(numberToLetters(704)
+		        + ", " + numberToLetters(705)
+		        + ", " + numberToLetters(2600)
+		        + ", " + numberToLetters(25999)
+		        + ", " + numberToLetters(26000)
+		        + ", " + numberToLetters(26001)
+				);
+		
+		System.out.println("");
+		System.out.println("Convert Numbers to Letters");
+		System.out.println("ALLA = " + lettersToNumber("ALLA"));		
 	}
 
 	public static String numberToLetters(int number){
@@ -51,8 +52,9 @@ System.out.println("ALLA = " + lettersToNumber("ALLA"));
 		while(runnerNum > 26){			
 		
 			int quotient = runnerNum / 26;
+			int remainder = runnerNum % 26;
 			
-			if( (runnerNum % 26) == 0)
+			if(remainder == 0)
 				--quotient;
 			
 			if(quotient > 0 && quotient < 27) {
@@ -64,21 +66,16 @@ System.out.println("ALLA = " + lettersToNumber("ALLA"));
 				
 			}
 			
-			if(quotient > 26){
+			if(quotient > 26){				
 				
-				int remainder = (runnerNum % 26);
 				remainderLetter = String.valueOf(charArr[remainder]) + remainderLetter;
-				runnerNum = quotient;
 			}
-			else{
-				int remainder = (runnerNum % 26);
+			else if( remainder > 0){
 				
-				if( remainder > 0)
 					sb.append(String.valueOf(charArr[remainder]));
-				
-				runnerNum = quotient;
-			}
-				
+			}	
+			
+			runnerNum = quotient;
 		}
 		
 		return String.valueOf(number) + " = " + sb.toString() + remainderLetter;

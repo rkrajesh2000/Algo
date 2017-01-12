@@ -10,6 +10,7 @@ public class FindLongestSubStringLength {
 	}
 
     //Test Case: "aab", "bbbbb", "dvdf"
+	//Time Complexity depends and worst case it is O(n^2)
     public static int lengthOfLongestSubstring(String s)
     {
         if(s==null)
