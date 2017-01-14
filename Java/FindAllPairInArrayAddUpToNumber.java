@@ -10,7 +10,7 @@ public class FindAllPairInArrayAddUpToNumber {
 
 		int target = 8;
 
-        int[] arrayForPairs = new int[] { 1, 5, 1, 3, 4, 2, 1 };
+        int[] arrayForPairs = new int[] { 3, 5, 4, 2, 1, 7, 6, -1, 10, 9 };
 
         System.out.print("Input Array : [");
        	for(int val : arrayForPairs ){
@@ -55,18 +55,12 @@ public class FindAllPairInArrayAddUpToNumber {
 	         return;
 	     }
 	     
-	     int num = Integer.MIN_VALUE;
-	     
 	     for(int i = begin; i < array.length; i++) {
-	     
-	         if(num != array[i]) {
 	         
-	             pairList.add(array[i]);
-	             int nextTarget = target - array[i];
-	             pairAdd(array, nextTarget , (i + 1), list, pairList);
-	             pairList.remove(pairList.size() - 1);
-	             num = array[i];
-	         }
+             pairList.add(array[i]);
+             int nextTarget = target - array[i];
+             pairAdd(array, nextTarget , i + 1, list, pairList);
+             pairList.remove(pairList.size() - 1);
 	     }     
 	 } 
 }
