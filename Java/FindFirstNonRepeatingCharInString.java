@@ -46,8 +46,8 @@ public class FindFirstNonRepeatingCharInString {
         
         while (it.hasNext()) {
         	Map.Entry<Character, Tuple> pair = it.next();
-        	int temp = pair.getValue().countVal;
-        	if(temp == 1 && (lowestIndex > pair.getValue().indexVal || lowestIndex == -1)){
+        	
+        	if(pair.getValue().countVal == 1 && (lowestIndex > pair.getValue().indexVal || lowestIndex == -1)){
         		lowestIndex = pair.getValue().indexVal;
         		myChar = pair.getKey();
         	}
