@@ -37,10 +37,9 @@ public class FindPairInArrayAddUpToNumber {
         
         System.out.println("");       
         
-        int[] fourSumArray = new int[] {-1, 0, -1, 0, -2, 2};
-        System.out.print("Find four sum equals to zero in an array :");  
-        
-        for (List<Integer> list : fourSum(fourSumArray,0)) {
+        System.out.print("Find three sum equals to zero in an array by allPossibleKCombinationAddUpToNumber() :");        
+
+        for (List<Integer> list : allPossibleKCombinationAddUpToNumber(threeSumArray,3, 0)) {
         	System.out.print("[");
         	
         	for(int val : list ){
@@ -50,8 +49,40 @@ public class FindPairInArrayAddUpToNumber {
         	
         	System.out.print("],");
         }
+        
+        System.out.println("");
+        
+        int[] fourSumArray = new int[] {-1, 0, -1, 0, -2, 2};
+        System.out.print("Find four sum equals to zero in an array by fourSum():");  
+        
+        for (List<Integer> list : fourSum(fourSumArray,0)) {
+        
+        	System.out.print("[");
+        	
+        	for(int val : list ){
+        		System.out.print(val);
+        		System.out.print(",");
+        	}
+        	
+        	System.out.print("],");
+        }
+        
+        System.out.print("\nFind four sum equals to zero in an array by allPossibleKCombinationAddUpToNumber() :");  
+        
+        for (List<Integer> list : allPossibleKCombinationAddUpToNumber(fourSumArray,4, 0)) {
+        
+        	System.out.print("[");
+        	
+        	for(int val : list ){
+        		System.out.print(val);
+        		System.out.print(",");
+        	}
+        	
+        	System.out.print("],");
+        }        
 	}
 	
+	 
     // Find all the pair of 2 numbers in array, which add up to the number
     // Example: Find all pairs of 2 numbers in the given array, which add up to the number 10.	
     private static void pairAddUpToNumber(int[] array, int num, StringBuilder sb)
@@ -190,4 +221,39 @@ public class FindPairInArrayAddUpToNumber {
 	 
 	    return result;
 	}
+	
+	// Test Case: [-6,14,-11,7,-5,-8,12,-13,-3,-14,7,0,-7,-15,-5,-9,-13,-7,-5,9,8,-13,-6,-8,-12,7,-10,11,8,-14,12,9,-15,-14,1,-5,-7,-10,-10,5,-9,12,12,-1,12,14,-2,-15,-8,0,9,7,2,10,14,-3,2,11,-6,-13,12,13,11,5,14,-11,7,14,-6,12,-4,-7,9,-7,-1,-1,-8,4,-9,-9,-11,-15,5,6,10,4,11,-10,-8,12,-8,-10,10,11,2,9,-15,-14,0,-13,14,11,-5,0,-11,1,6,-12]
+	private static List<List<Integer>> allPossibleKCombinationAddUpToNumber(int[] array, int k, int target){
+		
+	    List<List<Integer>> list = new ArrayList<List<Integer>>();
+	    List<Integer> combinationList = new ArrayList<Integer>();
+	    Arrays.sort(array);
+	    allPossibleKCombinationAdd(array, k, target, 0, list, combinationList);
+	    return list;		     
+	}
+	 
+	 private static void allPossibleKCombinationAdd(int[] array, int k, int target, int begin, List<List<Integer>> list, List<Integer> combinationList) {
+		 
+	     if( target == 0 && combinationList.size() == k){
+	         list.add(new ArrayList<Integer>(combinationList));
+	         return;
+	     }
+	     
+	     int num = Integer.MIN_VALUE;
+	     
+	     for(int i = begin; i < array.length; i++) {
+      	      if(combinationList.size() > k && target != 0 ){
+                 continue;
+              }	  
+      	      
+		      if(num != array[i]) {
+	    	      combinationList.add(array[i]);
+			      int nextTarget = target - array[i];
+			      allPossibleKCombinationAdd(array, k, nextTarget , i + 1, list, combinationList);
+			      combinationList.remove(combinationList.size() - 1);
+			      num = array[i];
+			     } 
+	     }
+	}	
+	
 }
