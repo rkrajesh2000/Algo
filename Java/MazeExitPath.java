@@ -2,15 +2,18 @@ package Algo.Test;
 
 public class MazeExitPath {
 
+	boolean visited[][];
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		MazeExitPath rat = new MazeExitPath();
         int maze[][] = {
-        					{1, 0, 1, 1, 1},
-        					{1, 0, 1, 0, 1},
-        					{1, 1, 1, 0, 1},
-        					{1, 1, 0, 0, 1}
+        					{1, 0, 1, 1, 1, 1},
+        					{1, 0, 1, 0, 1, 1},
+        					{1, 0, 1, 1, 0, 1},
+        					{1, 1, 0, 1, 0, 1},
+        					{1, 1, 1, 1, 0, 1}
                 		};
 
         int maze2[][] = {
@@ -19,15 +22,14 @@ public class MazeExitPath {
 				{1, 1, 1, 1, 1},
 				{1, 1, 0, 0, 1}
     		};
-        if(rat.findExitPath(maze,4, 5)){
+        if(rat.findExitPath(maze,5, 6)){
         	System.out.println("Exit path found in maze");
         }
         else
-        	System.out.println("Exit path not found in maze");
+        	System.out.println("Exit path not found in maze");        
         
         
-        
-        if(rat.findExitPathOnlyRightAndDownMove(maze2,4, 5)){
+        if(rat.findExitPathForwardOnlyMove(maze2,4, 5)){
         	System.out.println("Exit path found in maze");
         }
         else
@@ -49,18 +51,14 @@ public class MazeExitPath {
         }
     }
  
-    /* A utility function to check if x,y is valid
-        index for N*M maze */
+    
+    /* A utility function to check if x,y is valid index for N*M maze */
     boolean isValidIndex(int maze[][], int x, int y, int n, int m)
     {
-        // if (x,y outside maze) return false
-//        return (x >= 0 && x < n && y >= 0 &&
-//                y < m && maze[x][y] == 1);
-    	
         if (x >= 0 && x < n && y >= 0 &&
-                y < m && maze[x][y] == 1 && !track[x][y]){
+                y < m && maze[x][y] == 1 && !visited[x][y]){
         	
-        	track[x][y] = true;
+        	visited[x][y] = true;
         	return true;
         }
         
@@ -73,12 +71,11 @@ public class MazeExitPath {
        path is possible, otherwise return true and
        prints the path in the form of 1s. Please note
        that there may be more than one solutions, this
-       function prints one of the feasible solutions.*/
-    boolean track[][];
+       function prints one of the feasible solutions.*/    
     boolean findExitPath(int maze[][], int n, int m)
     {
     	int sol[][] = new int [n][m];
-    	track = new boolean [n][m];
+    	visited = new boolean [n][m];
     	
         if (exitPathUtil(maze, 0, 0, sol, n, m) == false)
         {
@@ -123,14 +120,14 @@ public class MazeExitPath {
             
             /* If none of the above movements work then
                BACKTRACK: unmark x,y as part of solution path */            
-            sol[x][y] = 0;
+            //sol[x][y] = 0;
             return false;
-        }
+        }        
         
         return false;
     }
     
-    boolean isValidIndexOnlyRightAndDownMove(int maze[][], int x, int y, int n, int m)
+    boolean isValidIndexForwardOnlyMove(int maze[][], int x, int y, int n, int m)
     {
         // if (x,y outside maze) return false
         return (x >= 0 && x < n && y >= 0 &&
@@ -138,10 +135,10 @@ public class MazeExitPath {
 
     }    
     
-    boolean findExitPathOnlyRightAndDownMove(int maze[][], int n, int m) {
+    boolean findExitPathForwardOnlyMove(int maze[][], int n, int m) {
     	int sol[][] = new int [n][m];
     	
-        if (exitPathUtilOnlyRightAndDownMove(maze, 0, 0, sol, n, m) == false)
+        if (exitPathUtilForwardOnlyMove(maze, 0, 0, sol, n, m) == false)
         {
             return false;
         }
@@ -150,16 +147,16 @@ public class MazeExitPath {
         return true;
     }
     
-    boolean exitPathUtilOnlyRightAndDownMove(int maze[][], int x, int y, int sol[][], int n, int m) {
+    boolean exitPathUtilForwardOnlyMove(int maze[][], int x, int y, int sol[][], int n, int m) {
 		// if (x,y is goal) return true
 		if (x == n - 1 && y == m - 1)
 		{
-		sol[x][y] = 1;
-		return true;
+			sol[x][y] = 1;
+			return true;
 		}
 		
 		// Check if maze[x][y] is valid
-		if (isValidIndexOnlyRightAndDownMove(maze, x, y, n, m) == true) {
+		if (isValidIndexForwardOnlyMove(maze, x, y, n, m) == true) {
 			// mark x,y as part of solution path
 			sol[x][y] = 1;
 			
@@ -167,12 +164,12 @@ public class MazeExitPath {
 			//System.out.print(x + ", " + y + " = " + maze[x][y] + " | ");
 			
 			/* Move forward in x direction. Moving down */
-			if (exitPathUtilOnlyRightAndDownMove(maze, x + 1, y, sol, n, m))
+			if (exitPathUtilForwardOnlyMove(maze, x + 1, y, sol, n, m))
 			  return true;
 			
 			/* If moving in x direction doesn't give
 			 solution then in y direction. Move right */
-			else if (exitPathUtilOnlyRightAndDownMove(maze, x, y + 1, sol, n, m))
+			else if (exitPathUtilForwardOnlyMove(maze, x, y + 1, sol, n, m))
 			  return true;   
           
 			
