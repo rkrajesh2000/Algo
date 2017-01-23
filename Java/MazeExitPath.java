@@ -7,13 +7,13 @@ public class MazeExitPath {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		MazeExitPath rat = new MazeExitPath();
+		MazeExitPath pathFinder = new MazeExitPath();
         int maze[][] = {
         					{1, 0, 1, 1, 1, 1},
         					{1, 0, 1, 0, 1, 1},
         					{1, 0, 1, 1, 0, 1},
-        					{1, 1, 0, 1, 0, 1},
-        					{1, 1, 1, 1, 0, 1}
+        					{1, 1, 0, 1, 1, 1},
+        					{1, 1, 1, 1, 1, 1}
                 		};
 
         int maze2[][] = {
@@ -22,25 +22,32 @@ public class MazeExitPath {
 				{1, 1, 1, 1, 1},
 				{1, 1, 0, 0, 1}
     		};
-        if(rat.findExitPath(maze,5, 6)){
-        	System.out.println("Exit path found in maze");
+        
+        if(pathFinder.findExitPathShortest(maze,5, 6)){
+        	System.out.println("Exit path found in maze (Shortest)");
         }
         else
-        	System.out.println("Exit path not found in maze");        
+        	System.out.println("Exit path not found in maze (Shortest)");    
+
         
-        
-        if(rat.findExitPathForwardOnlyMove(maze2,4, 5)){
-        	System.out.println("Exit path found in maze");
+        if(pathFinder.findExitPathForwardOnlyMove(maze2,4, 5)){
+        	System.out.println("Exit path found in maze (ForwardOnlyMove)");
         }
         else
-        	System.out.println("Exit path not found in maze");
+        	System.out.println("Exit path not found in maze (ForwardOnlyMove)");
+        
+        if(pathFinder.findExitPathLongest(maze,5, 6)){
+        	System.out.println("Exit path found in maze (Longest). Not working need to fix.");
+        }
+        else
+        	System.out.println("Exit path not found in maze (Longest). Not working need to fix.");          
 	}
 
     
     
     /* A utility function to print solution matrix
        sol[N][M] */
-    void printPath(int sol[][], int n, int m)
+    private void printPath(int sol[][], int n, int m)
     {
         for (int i = 0; i < n; i++)
         {
@@ -72,12 +79,12 @@ public class MazeExitPath {
        prints the path in the form of 1s. Please note
        that there may be more than one solutions, this
        function prints one of the feasible solutions.*/    
-    boolean findExitPath(int maze[][], int n, int m)
+    boolean findExitPathShortest(int maze[][], int n, int m)
     {
     	int sol[][] = new int [n][m];
     	visited = new boolean [n][m];
     	
-        if (exitPathUtil(maze, 0, 0, sol, n, m) == false)
+        if (exitPathShortestUtil(maze, 0, 0, sol, n, m) == false)
         {
             return false;
         }
@@ -87,7 +94,7 @@ public class MazeExitPath {
     }
  
     /* A recursive utility function to solve Maze problem */
-    boolean exitPathUtil(int maze[][], int x, int y,
+    boolean exitPathShortestUtil(int maze[][], int x, int y,
                           int sol[][], int n, int m)
     {
         // if (x,y is goal) return true
@@ -104,18 +111,18 @@ public class MazeExitPath {
             sol[x][y] = 1;
  
             /* Move forward in x direction. Moving down */
-            if (exitPathUtil(maze, x + 1, y, sol, n, m))
+            if (exitPathShortestUtil(maze, x + 1, y, sol, n, m))
                 return true;
  
             /* If moving in x direction doesn't give
                solution then in y direction. Move right */
-            else if (exitPathUtil(maze, x, y + 1, sol, n, m))
+            else if (exitPathShortestUtil(maze, x, y + 1, sol, n, m))
                 return true;   
             /* Moving up in straight direction*/
-            else if (exitPathUtil(maze, x - 1, y , sol, n, m))
+            else if (exitPathShortestUtil(maze, x - 1, y , sol, n, m))
                 return true; 
             /* Moving up and left direction*/
-            else if (exitPathUtil(maze, x - 1, y-1 , sol, n, m))
+            else if (exitPathShortestUtil(maze, x - 1, y-1 , sol, n, m))
                 return true;            
             
             /* If none of the above movements work then
@@ -180,5 +187,58 @@ public class MazeExitPath {
 		}
 		
 		return false;
-	}    
+	}
+    
+    boolean findExitPathLongest(int maze[][], int n, int m)
+    {
+    	int sol[][] = new int [n][m];
+    	visited = new boolean [n][m];
+    	
+        if (exitPathLongestUtil(maze, 0, 0, sol, n, m) == false)
+        {
+            return false;
+        }
+ 
+        printPath(sol, n, m);
+        return true;
+    }
+ 
+    /* A recursive utility function to solve Maze problem */
+    boolean exitPathLongestUtil(int maze[][], int x, int y,
+                          int sol[][], int n, int m)
+    {
+        // if (x,y is goal) return true
+        if (x == n - 1 && y == m - 1)
+        {
+            sol[x][y] = 1;
+            return true;
+        }
+ 
+        // Check if maze[x][y] is valid
+        if (isValidIndex(maze, x, y, n, m) == true)
+        {
+            // mark x,y as part of solution path
+            sol[x][y] = 1;
+ 
+            /* Moving up and left direction*/
+            if (exitPathLongestUtil(maze, x - 1, y-1 , sol, n, m))
+                return true; 
+            /* Moving up in straight direction*/
+            else if (exitPathLongestUtil(maze, x - 1, y , sol, n, m))
+                return true;   
+            /* Move forward in x direction. Moving down */
+            else if (exitPathLongestUtil(maze, x + 1, y, sol, n, m))
+                return true; 
+            /* If moving in x direction doesn't give solution then in y direction. Move right */
+            else if (exitPathLongestUtil(maze, x, y + 1, sol, n, m))
+                return true;            
+            
+            /* If none of the above movements work then
+               BACKTRACK: unmark x,y as part of solution path */            
+            sol[x][y] = 0;
+            return false;
+        }        
+        
+        return false;
+    }    
 }
