@@ -9,12 +9,13 @@ public class FetchDataFromDB {
 	public static void main(String[] args) {
 
 		 try{  
-			 //Dictionary Check
-			 Dictionary<Integer,Integer> dic = new Hashtable<Integer,Integer>();
-			 dic.put(1,1);
-			 int i = dic.get(1);
-			 dic.remove(1);
+				 //Dictionary Check
+				 Dictionary<Integer,Integer> dic = new Hashtable<Integer,Integer>();
+				 dic.put(1,1);
+				 int i = dic.get(1);
+				 dic.remove(1);
 			 
+			 //JDBC
 			   String database="MyTestDB.mdb";//Here database exists in the current directory  
 			  
 			   String url="jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)}; DBQ=" + database + ";DriverID=22;READONLY=true";  

@@ -9,11 +9,11 @@ public class MazeExitPath {
 		
 		MazeExitPath pathFinder = new MazeExitPath();
         int maze[][] = {
-        					{1, 0, 1, 1, 1, 1},
-        					{1, 0, 1, 0, 1, 1},
-        					{1, 0, 1, 1, 0, 1},
-        					{1, 1, 0, 1, 1, 1},
-        					{1, 1, 1, 1, 1, 1}
+                {1, 0, 1, 1, 1, 1},
+                {1, 0, 1, 0, 1, 1},
+                {1, 0, 1, 1, 1, 1},
+                {1, 0, 1, 1, 1, 1},
+                {1, 1, 1, 0, 1, 1}
                 		};
 
         int maze2[][] = {
@@ -45,8 +45,7 @@ public class MazeExitPath {
 
     
     
-    /* A utility function to print solution matrix
-       sol[N][M] */
+    /* A utility function to print solution matrix sol[N][M] */
     private void printPath(int sol[][], int n, int m)
     {
         for (int i = 0; i < n; i++)
@@ -112,8 +111,7 @@ public class MazeExitPath {
  
             /* Move forward in x direction. Moving down */
             if (exitPathShortestUtil(maze, x + 1, y, sol, n, m))
-                return true;
- 
+                return true; 
             /* If moving in x direction doesn't give
                solution then in y direction. Move right */
             else if (exitPathShortestUtil(maze, x, y + 1, sol, n, m))
@@ -127,7 +125,7 @@ public class MazeExitPath {
             
             /* If none of the above movements work then
                BACKTRACK: unmark x,y as part of solution path */            
-            //sol[x][y] = 0;
+            sol[x][y] = 0;
             return false;
         }        
         

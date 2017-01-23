@@ -140,6 +140,4 @@ public class FindAllCombinationInArrayAddUpToNumber {
              combinationList.remove(combinationList.size() - 1);
 	     }     
 	 }
-	 
-
 }
