@@ -7,7 +7,7 @@ public class MedianOfSortedArrays {
       int[] nums1 = new int[] {1, 2, 5, 8};
       int[] nums2 = new int[] { 3, 4, 7,10 };
       System.out.println(String.valueOf("Find Median of two Sorted Arrays by Array Merge : " + String.valueOf(findMedianSortedArrays(nums1,nums2))));
-      System.out.println(String.valueOf("Find Median  of two Sorted Arrays by Finding Kth Element : " + String.valueOf(findMedianSortedArraysWtihKthEleSearch(nums1,nums2))));
+      System.out.println(String.valueOf("Find Median of two Sorted Arrays by Finding Kth Element : " + String.valueOf(findMedianSortedArraysWtihKthEleSearch(nums1,nums2))));
 
 	}
 

@@ -6,7 +6,7 @@ public class FindLongestSubStringLength {
 
 	public static void main(String[] args) {
 
-		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("abcdefbkokkflasdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("abcdefbkokkflasdf"));
+		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("abcedefbkokkflasdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("abcedefbkokkflasdf"));
 		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("bbbbb") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("bbbbb"));
 		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("dvdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("dvdf"));
 		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("abb") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("abb"));

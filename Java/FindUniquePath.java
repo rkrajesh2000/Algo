@@ -4,8 +4,8 @@ public class FindUniquePath {
 
 	public static void main(String[] args) {
 
-		System.out.println("Total Unique paths found : " + uniquePaths(3,7));
-		System.out.println("Total Unique paths found by DFS : " + uniquePathsByDFS(3,7));
+		System.out.println("uniquePaths() --> Total Unique paths found : " + uniquePaths(3,7));
+		System.out.println("uniquePathsByDFS() --> Total Unique paths found by DFS : " + uniquePathsByDFS(3,7));
 		
 		int[][] grid = new int[][]{
 		  {0,0,0},
@@ -13,7 +13,7 @@ public class FindUniquePath {
 		  {0,0,0}
 		};
 	
-		System.out.println("Total Unique paths found : " + uniquePathsWithObstacle(grid));
+		System.out.println("uniquePathsWithObstacle() --> Total Unique paths found : " + uniquePathsWithObstacle(grid));
 		
 		int[][] grid2 = new int[][]{
 				  {1,2,5},
@@ -21,7 +21,7 @@ public class FindUniquePath {
 				  //{7,8,9}
 				};
 			
-				System.out.println("Minimum paths sum : " + minPathSum(grid2));		
+				System.out.println("minPathSum(): Minimum paths sum : " + minPathSum(grid2));		
 	}
 
 	private static int uniquePaths(int n, int m)
