@@ -1,9 +1,6 @@
 package Algo.Test;
-import java.util.HashMap;
-import java.lang.Math;
-import java.util.TreeMap;
 
-public class Convertor {
+public class ZigZagConvertor {
 
 	public static void main(String[] args) {
 
