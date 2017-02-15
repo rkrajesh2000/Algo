@@ -67,6 +67,7 @@ public class GraphCloning {
 		while(!queue.isEmpty()){
 			
 			GraphNode currNode = queue.pop();
+			GraphNode currClonedNode = map.get(currNode);
 			ArrayList<GraphNode> currNbrList = currNode.neighbors;
 			
 			if(currNbrList == null)
@@ -79,13 +80,13 @@ public class GraphCloning {
 					GraphNode newNode = new GraphNode(eachNbrNode.val);
 					map.put(eachNbrNode, newNode);
 					//Get the value (previously cloned node) of current node and add newly created (cloned) node as neighbor. 
-					map.get(currNode).neighbors.add(newNode);  
+					currClonedNode.neighbors.add(newNode);  
 					queue.push(eachNbrNode);					
 				}
 				else{
 					
 					GraphNode prevClonedNode = map.get(eachNbrNode); // Get the previously cloned node value
-					map.get(currNode).neighbors.add(prevClonedNode); // Get the previously cloned node value of current node and add as neighbor
+					currClonedNode.neighbors.add(prevClonedNode); // Get the previously cloned node value of current node and add as neighbor
 				}
 			}
 		}

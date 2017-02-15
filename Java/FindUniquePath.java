@@ -59,24 +59,24 @@ public class FindUniquePath {
 	}
 	
 	private static int uniquePathsByDFS(int n, int m){
-		return dfs(0,0,m,n);
+		return dfs(0,0,n,m);
 	}
 	
-	private static int dfs(int i, int j, int m, int n){
+	private static int dfs(int i, int j, int n, int m){
 	    if(i==m-1 && j==n-1){
 	        return 1;
 	    }
 	 
 	    if(i<m-1 && j<n-1){
-	        return dfs(i+1,j,m,n) + dfs(i,j+1,m,n);
+	        return dfs(i+1,j,n,m) + dfs(i,j+1,n,m);
 	    }
 	 
 	    if(i<m-1){
-	        return dfs(i+1,j,m,n);
+	        return dfs(i+1,j,n,m);
 	    }
 	 
 	    if(j<n-1){
-	        return dfs(i,j+1,m,n);
+	        return dfs(i,j+1,n,m);
 	    }
 	 
 	    return 0;

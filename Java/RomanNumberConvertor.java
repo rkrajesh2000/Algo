@@ -39,11 +39,11 @@ public class RomanNumberConvertor {
 
 
     public final static String toRoman(int number) {
-        int l =  map.floorKey(number);
-        if ( number == l ) {
+        int n =  map.floorKey(number);
+        if ( number == n ) {
             return map.get(number);
         }
-        return map.get(l) + toRoman(number-l);
+        return map.get(n) + toRoman(number-n);
     }
     
 	public static void romanToDecimal(String romanNumber) {

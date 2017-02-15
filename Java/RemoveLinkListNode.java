@@ -42,24 +42,24 @@ public class RemoveLinkListNode {
         ListNode p1 = head;
         ListNode p2 = head;
 
-        int count2 = 0;
+        int count = 0;
 
         while (p2.next != null)
         {
             p2 = p2.next;
-            ++count2;
+            ++count;
         }
         
-        if(n==1 && count2 == 0)
+        if(n==1 && count == 0)
             return null;
-        else if (n > count2)
+        else if (n > count)
             return head.next;
 
 
-        while (n < count2)
+        while (n < count)
         {
             p1 = p1.next;
-            --count2;
+            --count;
         }
 
         p1.next = p1.next.next;

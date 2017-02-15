@@ -57,7 +57,7 @@ public class PhonePadCombination {
 	    char c = digits.charAt(index);
 	    char[] arr = map.get(c);
 	 
-	    for(int i=0; i<arr.length; i++){
+	    for(int i=0; i < arr.length; i++){
 	        sb.append(arr[i]);
 	        helper(result, sb, digits, index+1, map);
 	        sb.deleteCharAt(sb.length()-1);

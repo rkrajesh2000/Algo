@@ -63,7 +63,7 @@ public class MedianOfSortedArrays {
 	    
 	    public static double findMedianSortedArraysWtihKthEleSearch(int[] nums1, int[] nums2) {
 	        
-	        int total = nums1.length+nums2.length;
+	        int total = nums1.length + nums2.length;
 	        if(total%2==0){
 	            return (findKthElementInTwoShortedArray((total/2)+1, nums1, nums2, 0, 0) + findKthElementInTwoShortedArray(total/2, nums1, nums2, 0, 0))/2.0;
 	        }else{
@@ -84,8 +84,8 @@ public class MedianOfSortedArrays {
 	        int m1 = (n1+k/2)-1;
 	        int m2 = (n2+k/2)-1;
 	     
-	        int mid1 = m1<nums1.length?nums1[m1]:Integer.MAX_VALUE;    
-	        int mid2 = m2<nums2.length?nums2[m2]:Integer.MAX_VALUE;
+	        int mid1 = m1 < nums1.length ? nums1[m1] : Integer.MAX_VALUE;    
+	        int mid2 = m2 < nums2.length ? nums2[m2] : Integer.MAX_VALUE;
 	     
 	        if(mid1<mid2){
 	            return findKthElementInTwoShortedArray(k-k/2, nums1, nums2, m1+1, n2);

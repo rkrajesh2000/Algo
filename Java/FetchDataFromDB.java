@@ -15,7 +15,7 @@ public class FetchDataFromDB {
 				 int i = dic.get(1);
 				 dic.remove(1);
 			 
-			 //JDBC
+			   //JDBC
 			   String database="MyTestDB.mdb";//Here database exists in the current directory  
 			  
 			   String url="jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)}; DBQ=" + database + ";DriverID=22;READONLY=true";  
@@ -34,8 +34,8 @@ public class FetchDataFromDB {
 			   cs.setString(1, coffeeNameArg);
 			   cs.setFloat(2, maximumPercentageArg);
 			   cs.registerOutParameter(3, Types.NUMERIC);
-			   cs.setFloat(3, newPriceArg);
-			   cs.registerOutParameter(4, Types.VARCHAR);
+			   cs.setFloat(4, newPriceArg);
+			   cs.registerOutParameter(5, Types.VARCHAR);
 			   cs.execute();
 			   int supplierId = cs.getInt(3);
 			   String supplierName = cs.getString(4);*/

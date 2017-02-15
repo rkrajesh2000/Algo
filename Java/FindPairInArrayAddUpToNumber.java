@@ -10,7 +10,7 @@ public class FindPairInArrayAddUpToNumber {
 
 	public static void main(String[] args) {
 
-		int[] number = new int[] {-1,-2,-3,-4,-5};
+		//int[] number = new int[] {-1,-2,-3,-4,-5};
 		int givenNum = -8;
         StringBuilder sb = new StringBuilder();
         givenNum = 12;

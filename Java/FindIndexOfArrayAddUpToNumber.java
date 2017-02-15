@@ -58,8 +58,7 @@ public class FindIndexOfArrayAddUpToNumber {
 			else if( val != nums[i] && map.containsKey(val))
 			{
 				String[] iStr = map.get(nums[i]).split(",");
-				String[] iStrVal = map.get(val).split(",");
-				
+				String[] iStrVal = map.get(val).split(",");				
 			
 				for(int j = 0; j < iStr.length; j++){
 					for(int k = 0; k < iStrVal.length; k++){

@@ -83,10 +83,53 @@ public class FindLongestSubStringLength {
         return max;
     }
     
-    public static String valueOfLongestSubstring(String input){
+    public static String valueOfLongestSubstring(String s){
+
+    	if(s==null || s.length()==0)
+            return s;
+     
+        HashSet<Character> set = new HashSet<Character>();     
+        StringBuffer longestOverAll = new StringBuffer();
+        StringBuffer longestTillNow = new StringBuffer();        
+   
+        int i=0;
+        int start=0;
+        
+        while(i<s.length()){
+            char c = s.charAt(i);
+            if(!set.contains(c)){
+                set.add(c);                
+            }else{
+                
+            	if (longestTillNow.length() > longestOverAll.length()) 
+            		longestOverAll = longestTillNow;
+                                
+            	
+                while(start<i && s.charAt(start) != c){
+                    set.remove(s.charAt(start));
+                    start++;
+                }               
+
+                start++;
+                longestTillNow = new StringBuffer(); 
+                longestTillNow.append(s.substring(start, i));
+            }
+     
+            i++;
+            longestTillNow.append(c);
+        }
+     
+       	if (longestTillNow.length() > longestOverAll.length()) 
+            longestOverAll = longestTillNow;
+        
+
+        return longestOverAll.toString(); 
+    }
+    
+    //This is not working for all use cases
+    public static String valueOfLongestSubstring2(String input){
 
         HashSet<Character> set = new HashSet<Character>();
-
         StringBuffer longestOverAll = new StringBuffer();
         StringBuffer longestTillNow = new StringBuffer();
 
@@ -100,14 +143,17 @@ public class FindLongestSubStringLength {
                 }
             	
                 longestTillNow = new StringBuffer();                
-                longestTillNow.append("");
                 set.clear();
             }
             
             longestTillNow.append(c);
             set.add(c);
+            
+        	if (longestTillNow.length() > longestOverAll.length()) {
+                longestOverAll = longestTillNow;
+            }            
         }
-        
+          	
         if(longestOverAll.length()  == 0){
             return input;
         }     

@@ -23,13 +23,13 @@ import java.util.*;
 
 public class SessionLogDisplay{
 
-	  class TuppleLogs{
+	  class TupleLogs{
 	      int id;
 	      int startTime;
 	      int endTime;
 	  }
 	  
-	  public static void displaySessionLogs(List<TuppleLogs> logEntries) {
+	  public static void displaySessionLogs(List<TupleLogs> logEntries) {
 	      
 	      if(logEntries.size() == 0)
 	          return;
@@ -64,28 +64,28 @@ public class SessionLogDisplay{
 	  public static void main(String[] arg) {
 	  
 		  SessionLogDisplay obj = new SessionLogDisplay();
-	      List<TuppleLogs> logEntries = new ArrayList<TuppleLogs>();
+	      List<TupleLogs> logEntries = new ArrayList<TupleLogs>();
 	      
-	      TuppleLogs log1 = obj.new TuppleLogs();
+	      TupleLogs log1 = obj.new TupleLogs();
 	      log1.id = 1;
 	      log1.startTime = 1100;
 	      log1.endTime = 1200;
 	      logEntries.add(log1);        
 	      
-	      TuppleLogs log2 = obj.new TuppleLogs();
+	      TupleLogs log2 = obj.new TupleLogs();
 	      log2.id = 2;
 	      log2.startTime = 1030;
 	      log2.endTime = 1130;
 	      logEntries.add(log2);  
 	      
 	              
-	      TuppleLogs log3 = obj.new TuppleLogs();
+	      TupleLogs log3 = obj.new TupleLogs();
 	      log3.id = 3;
 	      log3.startTime = 1400;
 	      log3.endTime = 1500;
 	      logEntries.add(log3);                   
 	              
-	      TuppleLogs log4 = obj.new TuppleLogs();
+	      TupleLogs log4 = obj.new TupleLogs();
 	      log4.id = 4;
 	      log4.startTime = 1520;
 	      log4.endTime = 1700;

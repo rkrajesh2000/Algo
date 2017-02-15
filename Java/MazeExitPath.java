@@ -72,7 +72,7 @@ public class MazeExitPath {
     }
  
     /* This function solves the Maze problem using
-       Backtracking. It mainly uses solveMazeUtil()
+       Backtracking. It mainly uses exitPathShortestUtil()
        to solve the problem. It returns false if no
        path is possible, otherwise return true and
        prints the path in the form of 1s. Please note
@@ -219,7 +219,7 @@ public class MazeExitPath {
             sol[x][y] = 1;
  
             /* Moving up and left direction*/
-            if (exitPathLongestUtil(maze, x - 1, y-1 , sol, n, m))
+            if (exitPathLongestUtil(maze, x - 1, y - 1 , sol, n, m))
                 return true; 
             /* Moving up in straight direction*/
             else if (exitPathLongestUtil(maze, x - 1, y , sol, n, m))

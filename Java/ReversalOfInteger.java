@@ -10,10 +10,10 @@ public class ReversalOfInteger {
 	}
 
 	//Test Case: 1534236469, 1234, -1234
-    public static int reverseInteger(int x) {
+    public static int reverseInteger(int n) {
         try {
 
-        	int number = Math.abs(x);
+        	int number = Math.abs(n);
             int result = 0;
             
             while (number > 0) {
@@ -27,7 +27,7 @@ public class ReversalOfInteger {
                 number = number / 10;
             }
             
-            if(x < 0)
+            if(n < 0)
                 result = result * -1;
             
             return result;
