@@ -19,7 +19,6 @@ public class FindFirstNonRepeatingCharInString {
 		String input = "aacbaadce";
 		System.out.println("First unique charachter in string '" + input + " : " + FirstUniqueChar(input));
 		System.out.println("First unique charachter in string '" + input + " : " + FirstUniqueCharUnigLinkedHM(input));
-
 	}
 	
 
@@ -69,32 +68,28 @@ public class FindFirstNonRepeatingCharInString {
 	
 	public static char FirstUniqueCharUnigLinkedHM(String str){
 		
-		LinkedHashMap<Character, Tuple> map = new LinkedHashMap<Character, Tuple>();
+		LinkedHashMap<Character, Integer> map = new LinkedHashMap<Character, Integer>();
 		char myChar = ' ';
 		
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             
-            if(map.containsKey(c)){           	
-            	
-            	if(map.get(c).countVal < 2)            		
-            		map.get(c).countVal = 2;
+            if(map.containsKey(c)){
+            	if(map.get(c) < 2)
+            		map.replace(c, 2);
             }
             else {
-            	Tuple tup = new FindFirstNonRepeatingCharInString().new Tuple();
-            	tup.indexVal = i;
-            	tup.countVal = 1;
-            	map.put(c, tup);
+            	map.put(c, 1);
             }			
 		}
 	    
-        Iterator<Entry<Character, Tuple>> it = map.entrySet().iterator();
+        Iterator<Entry<Character, Integer>> it = map.entrySet().iterator();
 
         int counter = 0;
         while (it.hasNext()) {
-        	Map.Entry<Character, Tuple> pair = it.next();
+        	Map.Entry<Character, Integer> pair = it.next();
         	++counter;
-        	if(pair.getValue().countVal == 1){
+        	if(pair.getValue() == 1){
         		myChar = pair.getKey();
         		break;
         	}
