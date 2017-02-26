@@ -9,7 +9,10 @@ public class LargestNumberCombinationInArray {
 		Integer arr[] = new Integer[] { 1, 9, 7, 97, 12};
 		System.out.println("Largest Number can be created by array : " + getLargestNumberByDescendingOrder(arr));
 		System.out.println("");
-		System.out.println("Largest Number can be created by array : " + getLargestNumberByLexicographicSort(arr));		
+		System.out.println("Largest Number can be created by array : " + getLargestNumberByLexicographicSort(arr));
+		
+		findKthNumberLexicalOrder(13,2);
+		lexicalOrder(13);
 	}
 
 	//Given an array of integer create largest number using 
@@ -70,5 +73,43 @@ public class LargestNumberCombinationInArray {
 		}
 		
 		return sb.toString();
-	}	
+	}
+	
+	private static void lexicalOrder(int n){
+		List<Integer> list = new ArrayList<Integer>();
+		
+		for(int i = 1; i <= n; i++){
+			list.add(i);
+		}
+		
+		Collections.sort(list, new Comparator<Integer>() {
+	        @Override
+	        public int compare(Integer n1, Integer n2) {
+	            return n1.toString().compareTo(n2.toString());
+	        }
+	    });	
+		
+		System.out.println("Lexical Order : ");
+		for(int num : list){
+			System.out.print(num + ", ");
+		}
+	}
+	
+    private static void findKthNumberLexicalOrder(int n, int k) {
+        
+		List<Integer> list = new ArrayList<Integer>();
+		
+		for(int i = 1; i <= n; i++){
+			list.add(i);
+		}
+		
+		Collections.sort(list, new Comparator<Integer>() {
+	        @Override
+	        public int compare(Integer n1, Integer n2) {
+	            return n1.toString().compareTo(n2.toString());
+	        }
+	    });	  
+	    
+		System.out.println(k +"nd number in lexical order : " + list.get(k-1));
+    }	
 }

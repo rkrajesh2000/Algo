@@ -4,6 +4,7 @@ public class ListNode {
 
 	int val;
 	ListNode next;
+	ListNode random;
 	public ListNode(int x) { val = x; }	
 	
     public void appendToTail(int d)
