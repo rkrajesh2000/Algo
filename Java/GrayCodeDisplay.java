@@ -19,7 +19,7 @@ public class GrayCodeDisplay {
 	    }
 	 
 	    List<Integer> result = grayCode(n-1);
-	    int numToAdd = 1<<(n-1);
+	    int numToAdd = 1<<(n-1); //This would give [2 ^ (n-1)] value
 	 
 	    for(int i=result.size()-1; i>=0; i--){
 	        result.add( numToAdd + result.get(i) );

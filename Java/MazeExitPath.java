@@ -120,7 +120,7 @@ public class MazeExitPath {
             else if (exitPathShortestUtil(maze, x - 1, y , sol, n, m))
                 return true; 
             /* Moving up and left direction*/
-            else if (exitPathShortestUtil(maze, x - 1, y-1 , sol, n, m))
+            else if (exitPathShortestUtil(maze, x - 1, y - 1 , sol, n, m))
                 return true;            
             
             /* If none of the above movements work then

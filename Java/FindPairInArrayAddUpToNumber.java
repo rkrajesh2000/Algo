@@ -87,42 +87,42 @@ public class FindPairInArrayAddUpToNumber {
     // Example: Find all pairs of 2 numbers in the given array, which add up to the number 10.	
     private static void pairAddUpToNumber(int[] array, int num, StringBuilder sb)
     {
-    	HashMap<Integer, Integer> ht = new HashMap<Integer, Integer>();
+    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 
     	for(int n : array ) {
-            if (ht.containsKey(n))
-                ht.put(array[n], ht.get(n) + 1);
+            if (map.containsKey(n))
+                map.put(n, map.get(n) + 1);
             else
-            	ht.put(n, 1);
+            	map.put(n, 1);
         }
 
     	for(int n : array ) {    		
             int val = num;
             val = val - n;
-            pairAddUpToNumberCheckForRemainning(val, n, ht, sb);
+            pairAddUpToNumberCheckForRemainning(val, n, map, sb);
         }
     }
     
-    private static void pairAddUpToNumberCheckForRemainning(int val, int n, HashMap<Integer, Integer> ht, StringBuilder sb)
+    private static void pairAddUpToNumberCheckForRemainning(int val, int n, HashMap<Integer, Integer> map, StringBuilder sb)
     {
-        if (val == n && ht.containsKey(val) && (int)ht.get(val) > 1)
+        if (val == n && map.containsKey(val) && (int)map.get(val) > 1)
         {
-            for (int j = 0; j < (int)ht.get(val); j++)
+            for (int j = 0; j < (int)map.get(val); j++)
             {
                 sb.append(" ( " + String.valueOf(val) + "," + String.valueOf(n) + " ) ");
             }
 
-            ht.remove(val);
+            map.remove(val);
         }
-        else if (val != n && ht.containsKey(val) && (int)ht.get(val) > 0)
+        else if (val != n && map.containsKey(val) && (int)map.get(val) > 0)
         {
-            for (int j = 0; j < ((int)ht.get(val) * (int)ht.get(n)); j++)
+            for (int j = 0; j < ((int)map.get(val) * (int)map.get(n)); j++)
             {
             	sb.append(" ( " + String.valueOf(val) + "," + String.valueOf(n) + " ) ");
             }
 
-            ht.remove(val);
-            ht.remove(n);
+            map.remove(val);
+            map.remove(n);
         }
     }	
 	
@@ -146,11 +146,11 @@ public class FindPairInArrayAddUpToNumber {
 	 
 	            while(j<k){
 	                if(nums[i]+nums[j]+nums[k]==0){
-	                    List<Integer> l = new ArrayList<Integer>();
-	                    l.add(nums[i]);
-	                    l.add(nums[j]);
-	                    l.add(nums[k]);
-	                    result.add(l);
+	                    List<Integer> list = new ArrayList<Integer>();
+	                    list.add(nums[i]);
+	                    list.add(nums[j]);
+	                    list.add(nums[k]);
+	                    result.add(list);
 	                    
 	                    j++;
 	                    k--;
@@ -197,21 +197,21 @@ public class FindPairInArrayAddUpToNumber {
 	                }else if(nums[i]+nums[j]+nums[k]+nums[l]>target){
 	                    l--;
 	                }else{
-	                    List<Integer> t = new ArrayList<Integer>();
-	                    t.add(nums[i]);
-	                    t.add(nums[j]);
-	                    t.add(nums[k]);
-	                    t.add(nums[l]);
-	                    result.add(t);
+	                    List<Integer> list = new ArrayList<Integer>();
+	                    list.add(nums[i]);
+	                    list.add(nums[j]);
+	                    list.add(nums[k]);
+	                    list.add(nums[l]);
+	                    result.add(list);
 	 
 	                    k++;
 	                    l--;
 	 
-	                    while(k<l &&nums[k]==nums[k-1]){
+	                    while(k<l && nums[k]== nums[k-1]){
 	                        k++;
 	                    }
 	                    
-	                    while(k<l &&nums[l]==nums[l+1] ){
+	                    while(k<l && nums[l]== nums[l+1] ){
 	                        l--;
 	                    }
 	                }	 
@@ -226,31 +226,31 @@ public class FindPairInArrayAddUpToNumber {
 	private static List<List<Integer>> allPossibleKCombinationAddUpToNumber(int[] array, int k, int target){
 		
 	    List<List<Integer>> list = new ArrayList<List<Integer>>();
-	    List<Integer> combinationList = new ArrayList<Integer>();
+	    List<Integer> innerList = new ArrayList<Integer>();
 	    Arrays.sort(array);
-	    allPossibleKCombinationAdd(array, k, target, 0, list, combinationList);
+	    allPossibleKCombinationAdd(array, k, target, 0, list, innerList);
 	    return list;		     
 	}
 	 
-	 private static void allPossibleKCombinationAdd(int[] array, int k, int target, int begin, List<List<Integer>> list, List<Integer> combinationList) {
+	 private static void allPossibleKCombinationAdd(int[] array, int k, int target, int begin, List<List<Integer>> list, List<Integer> innerList) {
 		 
-	     if( target == 0 && combinationList.size() == k){
-	         list.add(new ArrayList<Integer>(combinationList));
+	     if( target == 0 && innerList.size() == k){
+	         list.add(new ArrayList<Integer>(innerList));
 	         return;
 	     }
 	     
 	     int num = Integer.MIN_VALUE;
 	     
 	     for(int i = begin; i < array.length; i++) {
-      	      if(combinationList.size() > k && target != 0 ){
+      	      if(innerList.size() > k && target != 0 ){
                  continue;
               }	  
       	      
 		      if(num != array[i]) {
-	    	      combinationList.add(array[i]);
+	    	      innerList.add(array[i]);
 			      int nextTarget = target - array[i];
-			      allPossibleKCombinationAdd(array, k, nextTarget , i + 1, list, combinationList);
-			      combinationList.remove(combinationList.size() - 1);
+			      allPossibleKCombinationAdd(array, k, nextTarget , i + 1, list, innerList);
+			      innerList.remove(innerList.size() - 1);
 			      num = array[i];
 			     } 
 	     }

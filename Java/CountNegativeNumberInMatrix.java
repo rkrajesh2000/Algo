@@ -23,10 +23,10 @@ public class CountNegativeNumberInMatrix {
 		while(j >= 0 && i < n){
 			if(matrix[i][j] < 0){			
 				count = count + (j + 1);
-				i = i+1;
+				++i;
 			}
 			else
-				j = j - 1;
+				--j;
 		}
 			
 		return count;

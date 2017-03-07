@@ -9,7 +9,7 @@ public class FindLongestSubStringLength {
 		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("abcedefbkokkflasdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("abcedefbkokkflasdf"));
 		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("bbbbb") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("bbbbb"));
 		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("dvdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("dvdf"));
-		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("abb") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("abb"));
+		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("abcedefbkokkflasdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("abcedefbkokkflasdf"));
 		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("bbbbb") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("bbbbb"));
 		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("dvdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("dvdf"));	
 	}
@@ -79,7 +79,7 @@ public class FindLongestSubStringLength {
         }
      
         max = Math.max(max, set.size());
-
+        
         return max;
     }
     
@@ -105,7 +105,7 @@ public class FindLongestSubStringLength {
             		longestOverAll = longestTillNow;
                                 
             	
-                while(start<i && s.charAt(start) != c){
+                while(start < i && s.charAt(start) != c){
                     set.remove(s.charAt(start));
                     start++;
                 }               

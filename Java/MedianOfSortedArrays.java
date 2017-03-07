@@ -89,7 +89,8 @@ public class MedianOfSortedArrays {
 	     
 	        if(mid1<mid2){
 	            return findKthElementInTwoShortedArray(k-k/2, nums1, nums2, m1+1, n2);
-	        }else{
+	        }
+	        else{
 	            return findKthElementInTwoShortedArray(k-k/2, nums1, nums2, n1, m2+1);
 	        }
 	    }

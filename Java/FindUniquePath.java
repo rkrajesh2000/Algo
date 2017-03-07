@@ -23,6 +23,18 @@ public class FindUniquePath {
 			
 				System.out.println("minPathSum(): Minimum paths sum : " + minPathSum(grid2));		
 	}
+	
+	private static void printMatrix(int[][] matrix){
+		
+		System.out.println();
+		
+		for(int i = 0; i < matrix.length; ++i){
+			for(int j = 0; j < matrix[0].length; ++j){
+				System.out.print(matrix[i][j] + ", ");
+			}
+			System.out.println();
+		}		
+	}
 
 	private static int uniquePaths(int n, int m)
 	{
@@ -33,27 +45,23 @@ public class FindUniquePath {
 			return 1;
 		
 		int[][] matrix = new int[n][m];
+
 		
 		for(int i = 0; i < n; i++){
 			matrix[i][0] = 1;
 		}
-		
+
 		for(int i = 0; i < m; i++){
 			matrix[0][i] = 1;
 		}
-		
+
 		for(int i = 1; i < n; i++){
 			for(int j = 1; j < m; j++){
 				matrix[i][j] = matrix[i-1][j] + matrix[i][j-1];
 			}			
 		}
 		
-		for(int i = 0; i < n; ++i){
-			for(int j = 0; j < m; ++j){
-				System.out.print(matrix[i][j] + ", ");
-			}
-			System.out.println("");
-		}
+		printMatrix(matrix);
 		
 		return matrix[n-1][m-1];
 	}
@@ -129,12 +137,7 @@ public class FindUniquePath {
 			}			
 		}
 		
-		for(int i = 0; i < n; i++){
-			for(int j = 0; j < m; j++){
-				System.out.print(matrix[i][j] + ", ");
-			}
-			System.out.println("");
-		}
+		printMatrix(matrix);
 		
 		return matrix[n-1][m-1];
 	}	
@@ -171,12 +174,8 @@ public class FindUniquePath {
 	        }
 	    }
 	 
-		for(int i = 0; i < m; i++){
-			for(int j = 0; j < n; j++){
-				System.out.print(matrix[i][j] + ", ");
-			}
-			System.out.println("");
-		}	    
+	    printMatrix(matrix);
+	    
 	    return matrix[m-1][n-1];
 	}
 }

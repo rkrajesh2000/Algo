@@ -72,18 +72,18 @@ public class TreePathSum {
             TreeNode curr = nodes.poll();
             int sumValue = values.poll();        	
  
-            if(curr.left == null && curr.right == null && sumValue==sum){
+            if(curr.left == null && curr.right == null && sumValue == sum){
                 return true;
             }
  
             if(curr.left != null){
                 nodes.add(curr.left);
-                values.add(sumValue+curr.left.val);
+                values.add(sumValue + curr.left.val);
             }
  
             if(curr.right != null){
                 nodes.add(curr.right);
-                values.add(sumValue+curr.right.val);
+                values.add(sumValue + curr.right.val);
             }
         }
  

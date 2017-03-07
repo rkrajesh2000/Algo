@@ -41,7 +41,7 @@ public class RecoveryBinarySearchTree {
             return;
  
         recoverInOrder(root);
-        if(second!=null && first !=null){
+        if(second != null && first != null){
             int val = second.val;
             second.val = first.val;
             first.val = val;

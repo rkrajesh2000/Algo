@@ -7,8 +7,6 @@ public class LargestNumberCombinationInArray {
 	public static void main(String[] args) {
 		
 		Integer arr[] = new Integer[] { 1, 9, 7, 97, 12};
-		System.out.println("Largest Number can be created by array : " + getLargestNumberByDescendingOrder(arr));
-		System.out.println("");
 		System.out.println("Largest Number can be created by array : " + getLargestNumberByLexicographicSort(arr));
 		
 		findKthNumberLexicalOrder(13,2);
@@ -18,7 +16,8 @@ public class LargestNumberCombinationInArray {
 	//Given an array of integer create largest number using 
 	private static String getLargestNumberByLexicographicSort(Integer[] arr){
 		
-		int num1 = 0, num2 = 0;
+		int num1;
+		int num2;
 		StringBuffer sb = new StringBuffer();
 		
 		System.out.println("Array before lexicographic sort :" + Arrays.toString(arr));	
@@ -48,33 +47,7 @@ public class LargestNumberCombinationInArray {
 		return sb.toString();
 	}
 	
-	private static String getLargestNumberByDescendingOrder(Integer[] arr){
-		
-		int num1 = 0, num2 = 0;
-		StringBuffer sb = new StringBuffer();
-		
-		System.out.println("Array before Normal sort :" + Arrays.toString(arr));	
-		
-	    Arrays.sort(arr);
-	    
-	    System.out.println("Array after Normal sort  :" + Arrays.toString(arr));	
-	    
-		sb.append(arr[arr.length -1]);
-		
-		for(int i = (arr.length -2); i >= 0; i--){
-			
-			num1 = Integer.parseInt(sb.toString() + arr[i]);
-			num2 = Integer.parseInt(arr[i] + sb.toString());
-			
-			if(num1 > num2)
-				sb.append(arr[i]);
-			else
-				sb.insert(0, arr[i]);
-		}
-		
-		return sb.toString();
-	}
-	
+
 	private static void lexicalOrder(int n){
 		List<Integer> list = new ArrayList<Integer>();
 		

@@ -86,7 +86,7 @@ public class GraphCloning {
 				else{
 					
 					GraphNode prevClonedNode = map.get(eachNbrNode); // Get the previously cloned node value
-					currClonedNode.neighbors.add(prevClonedNode); // Get the previously cloned node value of current node and add as neighbor
+					currClonedNode.neighbors.add(prevClonedNode); // Add previously cloned node value to current node as neighbor
 				}
 			}
 		}

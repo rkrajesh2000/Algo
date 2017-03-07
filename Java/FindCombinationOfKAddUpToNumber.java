@@ -11,7 +11,7 @@ public class FindCombinationOfKAddUpToNumber {
 	    System.out.println("");
 	    System.out.print("All possible combinations of " + k + " numbers that add up to a number " + n + ", \ngiven that only numbers from 1 to 9 can be used and each  : ");
 	    
-	    for (List<Integer> list : allPossible3CombinationAddUpToNumber(k, n)) {
+	    for (List<Integer> list : allPossibleKCombinationAddUpToNumber(k, n)) {
 	    	System.out.print("[");
 	    	
 	    	int counter = 0;
@@ -26,30 +26,32 @@ public class FindCombinationOfKAddUpToNumber {
 	    }
 	}
 	
-	private static List<List<Integer>> allPossible3CombinationAddUpToNumber(int k, int target){
+	private static List<List<Integer>> allPossibleKCombinationAddUpToNumber(int k, int target){
 			
 		    List<List<Integer>> list = new ArrayList<List<Integer>>();
-		    List<Integer> combinationList = new ArrayList<Integer>();
-		    allPossible3CombinationAdd(k, target, 1, list, combinationList);		    
+		    List<Integer> innerList = new ArrayList<Integer>();
+		    allPossibleKCombinationAdd(k, target, target, 1, list, innerList);		    
 		    return list;		     
 	}
 	 
-	 private static void allPossible3CombinationAdd(int k, int target, int begin, List<List<Integer>> list, List<Integer> combinationList) {
+	 private static void allPossibleKCombinationAdd(int k, int target, int targetIterator, int begin, List<List<Integer>> list, List<Integer> innerList) {
 		 
-	     if( target == 0 && combinationList.size() == k){
-	         list.add(new ArrayList<Integer>(combinationList));
+	     if( target == 0 && innerList.size() == k){
+	         list.add(new ArrayList<Integer>(innerList));
 	         return;
 	     }
 	     
-	     for(int i = begin; i < 10; i++) {
+	     for(int i = begin; i < targetIterator; i++) {
+	    
+	    	 int nextTarget = target - i;
 	    	 
-          if(target - i < 0 || combinationList.size() > k){
-              continue;
-            }	    	 
-          combinationList.add(i);
-          int nextTarget = target - i;
-          allPossible3CombinationAdd(k, nextTarget , i + 1, list, combinationList);
-          combinationList.remove(combinationList.size() - 1);
+	    	 if(nextTarget < 0 || innerList.size() > k){
+	              break;
+	         }
+	    	 
+	    	 innerList.add(i);          
+	    	 allPossibleKCombinationAdd(k, nextTarget , targetIterator, i + 1, list, innerList);
+	    	 innerList.remove(innerList.size() - 1);
 	     }     
 	 }	     
 }

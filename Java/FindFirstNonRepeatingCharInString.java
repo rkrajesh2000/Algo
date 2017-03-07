@@ -49,11 +49,10 @@ public class FindFirstNonRepeatingCharInString {
             }			
 		}
         
-        Iterator<Entry<Character, Tuple>> it = map.entrySet().iterator();
         int counter = 0;
         
-        while (it.hasNext()) {
-        	Map.Entry<Character, Tuple> pair = it.next();
+        for (Map.Entry<Character, Tuple> pair : map.entrySet()) {
+        	
         	++counter;
         	
         	if(pair.getValue().countVal == 1 && (lowestIndex > pair.getValue().indexVal || lowestIndex == -1)){
@@ -83,17 +82,17 @@ public class FindFirstNonRepeatingCharInString {
             }			
 		}
 	    
-        Iterator<Entry<Character, Integer>> it = map.entrySet().iterator();
-
-        int counter = 0;
-        while (it.hasNext()) {
-        	Map.Entry<Character, Integer> pair = it.next();
+        int counter = 0;        
+        
+        for (Map.Entry<Character, Integer> pair : map.entrySet()) {
+        	
         	++counter;
+        	
         	if(pair.getValue() == 1){
         		myChar = pair.getKey();
         		break;
         	}
-        }
+        }        
         
         System.out.println("Number Of iteration by Linked Hash Map : " + counter);
 		return myChar;

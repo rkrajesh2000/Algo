@@ -58,7 +58,7 @@ public class FindLongestIncreasingPathMatrix {
             int x = i+dx[m];
             int y = j+dy[m];
  
-            if(x>=0&&y>=0&&x<matrix.length&&y<matrix[0].length&&matrix[x][y]>matrix[i][j]){
+            if(x>=0 && y>=0 && x<matrix.length && y<matrix[0].length && matrix[x][y] > matrix[i][j]){
                 mem[i][j]=Math.max(mem[i][j], dfs(matrix, x, y, mem));
             }
         } 

@@ -76,19 +76,19 @@ public class FindAllCombinationInArrayAddUpToNumber {
 	[14,6,25,9,30,20,33,34,28,30,16,12,31,9,9,12,34,16,25,32,8,7,30,12,33,20,21,29,24,17,27,34,11,17,30,6,32,21,27,17,16,8,24,12,12,28,11,33,10,32,22,13,34,18,12]
 	27	
 	*/
-	public static List<List<Integer>> uniqueCombinationAddUpToNumber(int[] array, int target){
+	private static List<List<Integer>> uniqueCombinationAddUpToNumber(int[] array, int target){
 
 	    List<List<Integer>> list = new ArrayList<List<Integer>>();
-	    List<Integer> combinationList = new ArrayList<Integer>();
+	    List<Integer> innerList = new ArrayList<Integer>();
 	    Arrays.sort(array);
-	    uniqueCombinationAdd(array, target, 0, list, combinationList);
+	    uniqueCombinationAdd(array, target, 0, list, innerList);
 	    return list;	     
 	}
 	 
-	 private static void uniqueCombinationAdd(int[] array, int target, int begin, List<List<Integer>> list, List<Integer> combinationList) {
+	 private static void uniqueCombinationAdd(int[] array, int target, int begin, List<List<Integer>> list, List<Integer> innerList) {
 	 
 	     if( target == 0){
-	         list.add(new ArrayList<Integer>(combinationList));
+	         list.add(new ArrayList<Integer>(innerList));
 	         return;
 	     }
 	     
@@ -97,14 +97,15 @@ public class FindAllCombinationInArrayAddUpToNumber {
 	     for(int i = begin; i < array.length; i++) {
              if(num != array[i]) {
     
-	             if(target - array[i] < 0){
-	               continue;
+            	 int nextTarget = target - array[i];
+            	 
+	             if(nextTarget < 0){
+	               break;
 	             }
 	            
-	             combinationList.add(array[i]);
-	             int nextTarget = target - array[i];
-	             uniqueCombinationAdd(array, nextTarget , i + 1, list, combinationList);
-	             combinationList.remove(combinationList.size() - 1);
+	             innerList.add(array[i]);
+	             uniqueCombinationAdd(array, nextTarget , i + 1, list, innerList);
+	             innerList.remove(innerList.size() - 1);
 	             num = array[i];
              }
 	     }     
@@ -131,11 +132,13 @@ public class FindAllCombinationInArrayAddUpToNumber {
 	     
 	     for(int i = begin; i < array.length; i++) {
 	    	 
-             if(target - array[i] < 0){
+	    	 int nextTarget = target - array[i];
+	    	 
+             if(nextTarget < 0){
                  continue;
                }	    	 
-             combinationList.add(array[i]);
-             int nextTarget = target - array[i];
+             
+             combinationList.add(array[i]);             
              allPossibleCombinationAdd(array, nextTarget , i + 1, list, combinationList);
              combinationList.remove(combinationList.size() - 1);
 	     }     
