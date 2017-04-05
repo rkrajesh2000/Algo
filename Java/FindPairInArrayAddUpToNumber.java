@@ -85,7 +85,7 @@ public class FindPairInArrayAddUpToNumber {
 	 
     // Find all the pair of 2 numbers in array, which add up to the number
     // Example: Find all pairs of 2 numbers in the given array, which add up to the number 10.	
-    private static void pairAddUpToNumber(int[] array, int num, StringBuilder sb)
+    private static void pairAddUpToNumber(int[] array, int target, StringBuilder sb)
     {
     	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 
@@ -97,7 +97,7 @@ public class FindPairInArrayAddUpToNumber {
         }
 
     	for(int n : array ) {    		
-            int val = num;
+            int val = target;
             val = val - n;
             pairAddUpToNumberCheckForRemainning(val, n, map, sb);
         }

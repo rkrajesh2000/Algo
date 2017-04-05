@@ -110,14 +110,14 @@ public class TreePathSum {
 	    //Search left path
 	    if(node.left != null){
 	        list.add(node.left.val);
-	        dfs(node.left, sum-node.left.val, result, list);
+	        dfs(node.left, sum - node.left.val, result, list);
 	        list.remove(list.size()-1);
 	    }
 	 
 	  //Search right path
 	    if(node.right!=null){
 	        list.add(node.right.val);
-	        dfs(node.right, sum-node.right.val, result, list);
+	        dfs(node.right, sum - node.right.val, result, list);
 	        list.remove(list.size()-1);
 	    }
 	}	

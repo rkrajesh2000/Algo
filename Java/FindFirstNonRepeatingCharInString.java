@@ -1,11 +1,8 @@
 package Algo.Test;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-
 
 public class FindFirstNonRepeatingCharInString {
 
@@ -18,7 +15,7 @@ public class FindFirstNonRepeatingCharInString {
 		
 		String input = "aacbaadce";
 		System.out.println("First unique charachter in string '" + input + " : " + FirstUniqueChar(input));
-		System.out.println("First unique charachter in string '" + input + " : " + FirstUniqueCharUnigLinkedHM(input));
+		System.out.println("First unique charachter in string '" + input + " : " + FirstUniqueCharByLinkedHM(input));
 	}
 	
 
@@ -65,7 +62,7 @@ public class FindFirstNonRepeatingCharInString {
 		return myChar;
 	}
 	
-	public static char FirstUniqueCharUnigLinkedHM(String str){
+	public static char FirstUniqueCharByLinkedHM(String str){
 		
 		LinkedHashMap<Character, Integer> map = new LinkedHashMap<Character, Integer>();
 		char myChar = ' ';

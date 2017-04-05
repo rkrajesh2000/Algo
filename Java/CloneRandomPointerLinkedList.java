@@ -81,7 +81,7 @@ public class CloneRandomPointerLinkedList {
 		
 		while(p != null && p.next != null){
 			ListNode temp = p.next;
-		    p.next = temp.next;
+		    p.next = p.next.next;
 		    p = temp;
 		}
 	 
