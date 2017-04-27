@@ -120,7 +120,7 @@ public class MergeShortedLinkList {
             return null;
      
         PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(new Comparator<ListNode>(){
-            public int compare(ListNode l1, ListNode l2){
+             public int compare(ListNode l1, ListNode l2){
                 return l1.val - l2.val;
             	}
 	        });

@@ -11,7 +11,10 @@ public class MergeSortedArrays {
 		int[] arr3 = { 0, 9, 10, 11 };
  
 		int[] result = mergeKSortedArray(new int[][] { arr1, arr2, arr3 });
-		System.out.println(Arrays.toString(result));
+		System.out.println("By mergeKSortedArray() with Comparable<ArrayContainer> : " + Arrays.toString(result));
+		
+		result = mergeKSortedArray(new int[][] { arr1, arr2, arr3 });
+		System.out.println("By mergeKSortedArrayAddDirectlyToQueue() : " + Arrays.toString(result));
 
 	}
 	
@@ -44,4 +47,27 @@ public class MergeSortedArrays {
  
 		return result;
 	}
+	
+	public static int[] mergeKSortedArrayAddDirectlyToQueue(int[][] arr) {
+		//PriorityQueue is heap in Java 
+		PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+		int total=0;
+ 
+		//add arrays to heap
+		for (int[] arrInner :  arr) {
+			for(int n: arrInner)
+				queue.add(n);
+			
+			total = total + arrInner.length;
+		}
+ 
+		int m=0;
+		int result[] = new int[total];
+ 
+		//while heap is not empty
+		while(!queue.isEmpty())
+			result[m++]=queue.poll();		
+ 
+		return result;
+	}	
 }

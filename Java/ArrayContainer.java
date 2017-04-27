@@ -10,7 +10,7 @@ class ArrayContainer implements Comparable<ArrayContainer> {
 	}
  
 	@Override
-	public int compareTo(ArrayContainer o) {
-		return this.arr[this.index] - o.arr[o.index];
+	public int compareTo(ArrayContainer arrContainer) {
+		return this.arr[this.index] - arrContainer.arr[arrContainer.index];
 	}
 }
