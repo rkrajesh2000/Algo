@@ -35,7 +35,7 @@ public class NumberAndLetterConvertor {
 		System.out.println("ALLA = " + lettersToNumber("ALLA"));		
 	}
 
-	public static String numberToLetters(int number){
+	public static String numberToLettersLenghthyMethod(int number){
 		
 		if(number <= 0)
 			return "Not Applicable";
@@ -79,6 +79,32 @@ public class NumberAndLetterConvertor {
 		}
 		
 		return String.valueOf(number) + " = " + sb.toString() + remainderLetter;
+	}
+	
+	public static String numberToLetters(int number){
+		
+		if(number <= 0)
+			return "Not Applicable";
+		
+		char[] charArr = new char[]{ 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+				
+		StringBuffer sb = new StringBuffer();
+		int runnerNum = number;
+		
+        while ( runnerNum > 0 ) {
+        	
+           	sb.append(charArr[runnerNum % 26]);    
+            
+            if( (runnerNum % 26) == 0){
+            	runnerNum /= 26 ;
+            	if(runnerNum > 0)
+            		runnerNum--;
+            }
+            else
+            	runnerNum /= 26 ;
+        }
+		
+		return String.valueOf(number) + " = " + sb.reverse().toString();
 	}
 	
 	public static int lettersToNumber(String letters){
