@@ -29,7 +29,7 @@ public class FindFirstIndexOfSubstring {
 					   return i;
 			   }
 			   else
-				   return result;
+				   break;
 	    
 		   }
 	   }

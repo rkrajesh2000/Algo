@@ -102,8 +102,7 @@ public class FindLongestSubStringLength {
             }else{
                 
             	if (longestTillNow.length() > longestOverAll.length()) 
-            		longestOverAll = longestTillNow;
-                                
+            		longestOverAll = longestTillNow;                                
             	
                 while(start < i && s.charAt(start) != c){
                     set.remove(s.charAt(start));

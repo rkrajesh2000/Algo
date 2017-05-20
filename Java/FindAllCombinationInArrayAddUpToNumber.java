@@ -117,8 +117,8 @@ public class FindAllCombinationInArrayAddUpToNumber {
 	 public static List<List<Integer>> allPossibleCombinationAddUpToNumber(int[] array, int target){
 	
 	    List<List<Integer>> list = new ArrayList<List<Integer>>();
-	    List<Integer> combinationList = new ArrayList<Integer>();
-	    allPossibleCombinationAdd(array, target, 0, list, combinationList);
+	    List<Integer> innerList = new ArrayList<Integer>();
+	    allPossibleCombinationAdd(array, target, 0, list, innerList);
 	    return list;	     
 	 }	
 	 

@@ -6,16 +6,24 @@ import java.util.Map;
 
 public class FindFirstNonRepeatingCharInString {
 
-	class Tuple {
+	static class Tuple {
 		int indexVal;
 		int countVal;
+		
+		Tuple(int index, int count){
+			indexVal = index;
+			countVal = count;
+		}
 	}
 	
 	public static void main(String[] args) {
 		
 		String input = "aacbaadce";
-		System.out.println("First unique charachter in string '" + input + " : " + FirstUniqueChar(input));
-		System.out.println("First unique charachter in string '" + input + " : " + FirstUniqueCharByLinkedHM(input));
+		System.out.println("First unique charachter in string by using HashMap '" + input + " : " + firstUniqueChar(input));
+		System.out.println("First unique charachter in string by using LinkedHashMap '" + input + " : " + firstUniqueCharByLinkedHM(input));
+		System.out.println("First unique charachter in string by using Char Array '" + input + " : " + firstUniqueCharArray(input));
+		System.out.println("First unique charachter index in string by using LinkedHashMap '" + input + " : " + FirstUniqueCharIndexByLinkedHM(input));
+		System.out.println("First unique charachter index in string by using Char Array '" + input + " : " + firstUniqueCharIndexCharArray(input));
 	}
 	
 
@@ -24,7 +32,7 @@ public class FindFirstNonRepeatingCharInString {
 	if the input string is "GeeksforGeeks", then output should be "f" and 
 	if input string is "GeeksQuiz", then output should be "G".
 	*/	
-	public static char FirstUniqueChar(String str){
+	public static char firstUniqueChar(String str){
 		
 		HashMap<Character, Tuple> map = new HashMap<Character, Tuple>();
 		char myChar = ' ';
@@ -39,18 +47,12 @@ public class FindFirstNonRepeatingCharInString {
             		map.get(c).countVal = 2;
             }
             else {
-            	Tuple tup = new FindFirstNonRepeatingCharInString().new Tuple();
-            	tup.indexVal = i;
-            	tup.countVal = 1;
+            	Tuple tup = new Tuple(i, 1);
             	map.put(c, tup);
             }			
 		}
         
-        int counter = 0;
-        
         for (Map.Entry<Character, Tuple> pair : map.entrySet()) {
-        	
-        	++counter;
         	
         	if(pair.getValue().countVal == 1 && (lowestIndex > pair.getValue().indexVal || lowestIndex == -1)){
         		lowestIndex = pair.getValue().indexVal;
@@ -58,11 +60,10 @@ public class FindFirstNonRepeatingCharInString {
         	}
         }
         
-        System.out.println("Number Of iteration by Hash Map : " + counter);
 		return myChar;
 	}
 	
-	public static char FirstUniqueCharByLinkedHM(String str){
+	public static char firstUniqueCharByLinkedHM(String str){
 		
 		LinkedHashMap<Character, Integer> map = new LinkedHashMap<Character, Integer>();
 		char myChar = ' ';
@@ -78,12 +79,8 @@ public class FindFirstNonRepeatingCharInString {
             	map.put(c, 1);
             }			
 		}
-	    
-        int counter = 0;        
-        
+	            
         for (Map.Entry<Character, Integer> pair : map.entrySet()) {
-        	
-        	++counter;
         	
         	if(pair.getValue() == 1){
         		myChar = pair.getKey();
@@ -91,7 +88,67 @@ public class FindFirstNonRepeatingCharInString {
         	}
         }        
         
-        System.out.println("Number Of iteration by Linked Hash Map : " + counter);
 		return myChar;
-	}	
+	}
+	
+	public static int FirstUniqueCharIndexByLinkedHM(String str){
+		
+		LinkedHashMap<Character, Tuple> map = new LinkedHashMap<Character, Tuple>();
+		int index = -1;
+		
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            
+            if(map.containsKey(c)){
+            	if(map.get(c).countVal < 2)
+            		map.get(c).countVal= 2;
+            }
+            else {
+            	map.put(c, new Tuple(i, 1));
+            }			
+		}
+	            
+        for (Map.Entry<Character, Tuple> pair : map.entrySet()) {
+        	
+        	if(pair.getValue().countVal == 1){
+        		index = pair.getValue().indexVal;
+        		break;
+        	}
+        }        
+        
+		return index;
+	}
+	
+    public static char firstUniqueCharArray(String s) {
+    	
+        int[] arrayOfAlfabed = new int[256];
+        char[] arr = s.toCharArray();
+    
+        for(char c : arr ){
+            arrayOfAlfabed[c]++;
+        }
+        
+        for(int i=0;i<arr.length;i++){
+            if (arrayOfAlfabed[arr[i]]==1) 
+            	return (char)arr[i];
+        }
+    
+        return ' ';       
+    }
+    
+    public static int firstUniqueCharIndexCharArray(String s) {
+        int[] arrayOfAlfabed =new int[256];
+        char[] arr =s.toCharArray();
+    
+        for(char c : arr ){
+            arrayOfAlfabed[c]++;
+        }
+        
+        for(int i=0;i<arr.length;i++){
+            if (arrayOfAlfabed[arr[i]]==1) 
+            	return i;
+        }
+    
+        return -1;       
+    }	
 }

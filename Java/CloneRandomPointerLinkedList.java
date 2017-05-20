@@ -65,10 +65,6 @@ public class CloneRandomPointerLinkedList {
 		// copy random pointer for each new node
 		p = head;
 		
-//		System.out.print("head =");
-//		DisplayNode(head);
-//		System.out.println();
-		
 		while (p != null) {
 			if (p.random != null)
 				p.next.random = p.random.next;
