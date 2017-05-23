@@ -122,10 +122,10 @@ public class FindAllCombinationInArrayAddUpToNumber {
 	    return list;	     
 	 }	
 	 
-	 private static void allPossibleCombinationAdd(int[] array, int target, int begin, List<List<Integer>> list, List<Integer> combinationList) {
+	 private static void allPossibleCombinationAdd(int[] array, int target, int begin, List<List<Integer>> list, List<Integer> innerList) {
 		 
 	     if( target == 0){
-	         list.add(new ArrayList<Integer>(combinationList));
+	         list.add(new ArrayList<Integer>(innerList));
 	         return;
 	     }
 	     
@@ -137,9 +137,9 @@ public class FindAllCombinationInArrayAddUpToNumber {
                  continue;
                }	    	 
              
-             combinationList.add(array[i]);             
-             allPossibleCombinationAdd(array, nextTarget , i + 1, list, combinationList);
-             combinationList.remove(combinationList.size() - 1);
+             innerList.add(array[i]);             
+             allPossibleCombinationAdd(array, nextTarget , i + 1, list, innerList);
+             innerList.remove(innerList.size() - 1);
 	     }     
 	 }
 }

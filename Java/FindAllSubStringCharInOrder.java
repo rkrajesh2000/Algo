@@ -23,6 +23,9 @@ public class FindAllSubStringCharInOrder {
 	    
 	    for(int i=0; i < lenBig; i++){
 	    	
+	    	if((lenSmall - index) > (lenBig - i))
+	    		break;
+	    	
 	        char curChar = bigStr.charAt(i);
 	        
 	        if(curChar == smallStr.charAt(index)){

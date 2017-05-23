@@ -30,13 +30,18 @@ public class ReverseLinkList {
     	while(runner != null){
     		System.out.print(runner.val + ",");  
     		runner = runner.next;
-    	}
+    	}   	
+
     	
 		ListNode obj2 = new ListNode(1);
 		obj2.appendToTail(2);
 		obj2.appendToTail(3);
 		obj2.appendToTail(4);
 		obj2.appendToTail(5);
+		obj2.appendToTail(6);
+		obj2.appendToTail(7);
+		obj2.appendToTail(8);
+		obj2.appendToTail(9);		
 		runner = obj2;
 		
     	System.out.println();
@@ -46,7 +51,7 @@ public class ReverseLinkList {
     		runner = runner.next;
     	} 
     	
-    	runner = reverseBetween(obj2, 2, 4);
+    	runner = reverseBetween(obj2, 2, 7);
     	
     	System.out.println();
         System.out.print("List After In Between Reverse ");
@@ -70,7 +75,7 @@ public class ReverseLinkList {
 	 
 	    ListNode p1 = head;
 	    ListNode p2 = p1.next;
-	    head.next = null;
+	    p1.next = null;
 	    
 	    while(p1!=null && p2!=null){
 	        ListNode temp = p2.next;

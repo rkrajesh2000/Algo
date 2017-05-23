@@ -27,9 +27,6 @@ public class FindWordBreakInDictionary {
 		
 		System.out.println("Word break for " + target + " found wordBreakQ(): " + wordBreakQ(target,wordDict));		
 		System.out.println("Word break for " + target + " found wordBreakDP(): " + wordBreakDP(target,wordDict));		
-		System.out.println("Word break for " + target + " found wordBreakQDisplayWord(): " + wordBreakQDisplayWord(target,wordDict));
-		
-		
 	}
 
 	private static boolean wordBreakQ(String s, List<String> wordDict) {
@@ -60,7 +57,8 @@ public class FindWordBreakInDictionary {
 	        if (visited[start]) 
 	        	continue;
 	        	
-            for (int end = start + minL; end <= s.length()-1; end++) {
+            for (int end = start + minL; end < s.length(); end++) {
+            	
                 if (wordDictSet.contains(s.substring(start, end))) {
                     queue.offer(end);
 
@@ -74,63 +72,6 @@ public class FindWordBreakInDictionary {
 	        
 	    }
 	    return false;
-	}
-	
-	private static List<List<String>> wordBreakQDisplayWord(String s, List<String> wordDict) {
-		
-        HashSet<String> wordDictSet = new HashSet<String>(wordDict);
-        int  minL = Integer.MAX_VALUE;
-        
-        for (String str : wordDict) {
-            int n = str.length();
-            
-            if (n < minL) 
-            	minL = n;   
-            
-            wordDictSet.add(str);
-        }
-        List<List<String>> list = new ArrayList<List<String>>();
-        List<String> result = new ArrayList<String>();
-        
-    	if(wordDictSet.contains(s)){
-    		result.add(s);
-    		list.add(result);
-    		return list;
-    	}
- 
-	    Queue<Integer> queue = new LinkedList<Integer>();
-	    boolean[] visited = new boolean[s.length()];
-	    queue.offer(0);
-	    
-	    while (!queue.isEmpty()) {
-	    	
-	        int start = queue.poll();
-	        
-	        if (visited[start]) 
-	        	continue;
-	        	
-            for (int end = start + minL; end <= s.length()-1; end++) {
-                if (wordDictSet.contains(s.substring(start, end))) {
-                    queue.offer(end);
-                    result.add(s.substring(start, end));
-
-//                    if (wordDictSet.contains(s.substring(end,s.length()))) {
-//                        result.add(s.substring(end,s.length()));
-//                    }
-//                    else 
-//                    	result.remove(result.size()-1);
-                }
-                
-                if(end == s.length()-1){
-                	list.add(result);
-                	result = new ArrayList<String>(); 
-                }                
-            }            
-
-            visited[start] = true;
-	        
-	    }
-	    return list;
 	}
 	
     private static boolean wordBreakDP(String s, List<String> wordDict) {

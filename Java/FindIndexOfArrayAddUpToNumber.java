@@ -43,15 +43,8 @@ public class FindIndexOfArrayAddUpToNumber {
 				String[] iStr = map.get(nums[i]).split(",");
 				
 				if(iStr.length > 1){	
-					return new int[]{Integer.parseInt(iStr[0]),Integer.parseInt(iStr[1])};
 					
-//					for(int j = 0; j < iStr.length; j++){
-//						for(int k=(j+1); k < iStr.length; k++){
-//							if ((nums[Integer.parseInt(iStr[j])] + nums[Integer.parseInt(iStr[k])]) == target){
-//								return new int[]{Integer.parseInt(iStr[j]),Integer.parseInt(iStr[k])};
-//							}
-//						}
-//					}
+					return new int[]{Integer.parseInt(iStr[0]),Integer.parseInt(iStr[1])};					
 				}
 
 				map.remove(val);
@@ -64,15 +57,7 @@ public class FindIndexOfArrayAddUpToNumber {
 			
 				if ((nums[Integer.parseInt(iStr[0])] + nums[Integer.parseInt(iStrVal[0])]) == target){
 					return new int[]{Integer.parseInt(iStr[0]),Integer.parseInt(iStrVal[0])};
-				}				
-				
-//				for(int j = 0; j < iStr.length; j++){
-//					for(int k = 0; k < iStrVal.length; k++){
-//						if ((nums[Integer.parseInt(iStr[j])] + nums[Integer.parseInt(iStrVal[k])]) == target){
-//							return new int[]{Integer.parseInt(iStr[j]),Integer.parseInt(iStrVal[k])};
-//						}
-//					}
-//				}
+				}
 				
 				map.remove(val);
 			}

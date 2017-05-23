@@ -18,28 +18,38 @@ public class FindWordBreakInDictionary2 {
 	public static void main(String[] args) {
 
 		List<String> wordDict = new ArrayList<String>();
-		wordDict.add("Deepak");
-		wordDict.add("Rajesh");
-		wordDict.add("Senthil");
-		wordDict.add("Vikas");
-		wordDict.add("Kum");
-		wordDict.add("ar");
-		wordDict.add("Anurag");
-		wordDict.add("RajeshK");
-		wordDict.add("umar");
-		
-		String target = "RajeshKumar";
+//		wordDict.add("Deepak");
+//		wordDict.add("Rajesh");
+//		wordDict.add("Senthil");
+//		wordDict.add("Vikas");
+//		wordDict.add("Kum");
+//		wordDict.add("ar");
+//		wordDict.add("Anurag");
+//		wordDict.add("RajeshK");
+//		wordDict.add("umar");		
+//		String target = "RajeshKumar";
+
+		wordDict.add("cat");
+		wordDict.add("cats");
+		wordDict.add("and");
+		wordDict.add("sand");
+		wordDict.add("dog");
+		String target = "catsanddog";
 
 		System.out.println("Word break for " + target + " found allPossibleWordBreakCombination(): " + allPossibleWordBreakCombination(target,wordDict));
-		System.out.println("Word break for " + target + " found wordBreakLC(): " + wordBreakLC(target,wordDict));
+		System.out.println("Word break for " + target + " found wordBreakLC() recursion : " + wordBreakLC(target,wordDict));
+		System.out.println("Word break for " + target + " found wordBreakVG() iteration  : " + wordBreakVG(target,wordDict));
+		
 		
 	}
 	
-	 private static List<List<String>> allPossibleWordBreakCombination(String target, List<String> wordDict){
-	//private static List<String> allPossibleWordBreakCombination(String target, List<String> wordDict){
+	private static int  minL = Integer.MAX_VALUE;
+	
+	//This Method returns list of list
+	private static List<List<String>> allPossibleWordBreakCombination(String target, List<String> wordDict){
 			
         HashSet<String> wordDictSet = new HashSet<String>(wordDict);
-        int  minL = Integer.MAX_VALUE;
+        minL = Integer.MAX_VALUE;
         
         for (String str : wordDict) {
             int n = str.length();
@@ -52,11 +62,11 @@ public class FindWordBreakInDictionary2 {
         
 	    List<List<String>> list = new LinkedList<List<String>>();
 	    LinkedList<String> innerList = new LinkedList<String>();
-	    addAllWordBreakCombination(wordDict, target, 0, minL, list, innerList);
+	    addAllWordBreakCombination(wordDict, target, 0, list, innerList);
 	    return list;	     
 	 }	
 	 
-	 private static void addAllWordBreakCombination(List<String> wordDict, String target, int begin, int minL, List<List<String>> list, LinkedList<String> innerList) {
+	 private static void addAllWordBreakCombination(List<String> wordDict, String target, int begin, List<List<String>> list, LinkedList<String> innerList) {
 		 
 	     if(target.length() == begin){
 
@@ -76,15 +86,16 @@ public class FindWordBreakInDictionary2 {
                }	    	 
              
              innerList.add(nextTarget);             
-             addAllWordBreakCombination(wordDict, target , i + minL, minL, list, innerList);
+             addAllWordBreakCombination(wordDict, target , i + minL, list, innerList);
              innerList.remove(innerList.size() - 1);
 	     }     
 	 }
 	 
+	 // This Method returns list of string
 	 private static List<String> wordBreakLC(String s, List<String> wordDict) {
 	        
 	        HashSet<String> wordDictSet = new HashSet<String>(wordDict);
-	        int  minL = Integer.MAX_VALUE;
+	        minL = Integer.MAX_VALUE;
 	        
 	        for (String str : wordDict) {
 	            int n = str.length();
@@ -97,14 +108,14 @@ public class FindWordBreakInDictionary2 {
 	        
 	        List<String> list = new LinkedList<String>();
 		    LinkedList<String> innerList = new LinkedList<String>();
-		    addAllWordBreakCombinationLC(wordDictSet, s, 0, minL, list, innerList);
+		    addAllWordBreakCombinationLC(wordDictSet, s, 0, list, innerList);
 		    return list;        
 	 }
 	    
-	 private static void addAllWordBreakCombinationLC(HashSet<String> array, String target, int begin, int minL, List<String> list, LinkedList<String> combinationList) {
+	 private static void addAllWordBreakCombinationLC(HashSet<String> wordDictSet, String target, int begin, List<String> list, LinkedList<String> innerList) {
 			 
 		     if(target.length() == begin){
-		    	 list.add(String.join(" ", combinationList));		    	 
+		    	 list.add(String.join(" ", innerList));		    	 
 		         return;
 		     }
 		     
@@ -115,13 +126,67 @@ public class FindWordBreakInDictionary2 {
 		    	 
 		    	 String nextTarget = target.substring(begin, i + minL);
 		    	 
-	             if(!array.contains(nextTarget)){
+	             if(!wordDictSet.contains(nextTarget)){
 	                 continue;
 	               }	    	 
 	             
-	             combinationList.add(nextTarget);             
-	             addAllWordBreakCombinationLC(array, target , i + minL, minL, list, combinationList);
-	             combinationList.remove(combinationList.size() - 1);
+	             innerList.add(nextTarget);             
+	             addAllWordBreakCombinationLC(wordDictSet, target , i + minL, list, innerList);
+	             innerList.remove(innerList.size() - 1);
 		     }     
-		 }  	 
+	 }
+	 
+	 static class Data
+	 {
+	     public int index;
+	     public String value;
+	     
+	     public Data(int indx, String word)
+	     {
+	         index= indx;
+	         value = word;
+	     }	     
+	 }
+	 
+	 private static List<String> wordBreakVG(String s, List<String> wordDict) {		    
+		  
+        minL = Integer.MAX_VALUE;
+        
+        for (String str : wordDict) {
+            int n = str.length();
+            
+            if (n < minL) 
+            	minL = n;   
+        }
+	    
+	    Queue<Data> queue = new LinkedList<Data>();
+	    List<String> response = new ArrayList<String>();		    
+	    Data dataTracker  = new Data(0,"");	
+	    queue.offer(dataTracker);
+	    
+	    while(!queue.isEmpty())
+	    {
+	        Data data =  queue.poll();
+	        int start = data.index;
+	        
+	        for(int i = start + minL; i <= s.length(); i++) {
+	        	
+	            String toCheck = s.substring(start, i);	            
+	             
+	            if(wordDict.contains(toCheck)) {
+	            	
+	                if(i == s.length()){	                	
+	                    response.add(data.value + toCheck);	                    
+	                }
+	                else{
+	                	dataTracker  = new Data(i, data.value + toCheck + " ");
+	                    queue.offer(dataTracker);
+	                }
+	               
+	            }
+	        }
+	    }
+
+	    return response;
+	}	 
 }

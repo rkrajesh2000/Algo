@@ -20,7 +20,6 @@ public class RomanNumberConvertor {
         map.put(5, "V");
         map.put(4, "IV");
         map.put(1, "I");
-
     }
     
 	public static void main(String[] args) {
@@ -92,10 +91,11 @@ public class RomanNumberConvertor {
                     break;
             }
         }
+        
         System.out.println(decimal);
     }
 	
-    public static int processDecimal(int decimal, int lastNumber, int lastDecimal) {
+    private static int processDecimal(int decimal, int lastNumber, int lastDecimal) {
         if (lastNumber > decimal) {
             return lastDecimal - decimal;
         } else {
