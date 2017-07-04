@@ -4,16 +4,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class TreeLevelOrderTravel {
-	static class TreeNode{
-		int val;
-		TreeNode left;
-		TreeNode right;
-		TreeNode rightSide;
-		
-		TreeNode(int v){
-			val = v;
-		}	
-	}
 	
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);
@@ -44,12 +34,12 @@ public class TreeLevelOrderTravel {
 				if(node != null){					
 				
 					if(node.left != null){
-						System.out.print(node.val + ", ");
+						System.out.print(node.left.val + ", ");
 						innerQueue.add(node.left);						
 					}
 					
 					if(node.right != null){
-						System.out.print(node.val + ", ");
+						System.out.print(node.right.val + ", ");
 						innerQueue.add(node.right);						
 					}
 				}

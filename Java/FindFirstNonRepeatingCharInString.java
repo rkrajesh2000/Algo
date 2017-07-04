@@ -122,17 +122,16 @@ public class FindFirstNonRepeatingCharInString {
     public static char firstUniqueCharArray(String s) {
     	
         int[] arrayOfAlfabed = new int[256];
-        char[] arr = s.toCharArray();
-    
-        for(char c : arr ){
-            arrayOfAlfabed[c]++;
+        
+        for(int i=0;i<s.length();i++){
+            arrayOfAlfabed[s.charAt(i)]++;
         }
         
-        for(int i=0;i<arr.length;i++){
-            if (arrayOfAlfabed[arr[i]]==1) 
-            	return (char)arr[i];
+        for(int i=0;i<s.length();i++){
+            if (arrayOfAlfabed[s.charAt(i)]==1) 
+            	return s.charAt(i);
         }
-    
+        
         return ' ';       
     }
     

@@ -94,14 +94,9 @@ public class NumberAndLetterConvertor {
         while ( runnerNum > 0 ) {
         	
            	sb.append(charArr[runnerNum % 26]);    
-            
-            if( (runnerNum % 26) == 0){
-            	runnerNum /= 26 ;
-            	if(runnerNum > 0)
-            		runnerNum--;
-            }
-            else
-            	runnerNum /= 26 ;
+            int bit = (runnerNum % 26 == 0) ? 1 : 0;
+           	runnerNum /= 26 ;
+           	runnerNum -= bit;
         }
 		
 		return String.valueOf(number) + " = " + sb.reverse().toString();

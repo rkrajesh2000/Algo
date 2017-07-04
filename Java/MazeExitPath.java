@@ -165,9 +165,6 @@ public class MazeExitPath {
 			// mark x,y as part of solution path
 			sol[x][y] = 1;
 			
-			
-			//System.out.print(x + ", " + y + " = " + maze[x][y] + " | ");
-			
 			/* Move forward in x direction. Moving down */
 			if (exitPathUtilForwardOnlyMove(maze, x + 1, y, sol, n, m))
 			  return true;

@@ -7,7 +7,7 @@ public class FindLongestPrefixInArray {
 
 	public static void main(String[] args) {
 		
-		String[] arrStr = new String[]{"abcde","abcefg","abcfgh","abcghi","gbchij"};
+		String[] arrStr = new String[]{"abcde","abcefg","abcfgh","abcghi","abchij"};
 		System.out.println("Common prefix is : " + longestCommonPrefix(arrStr));
 	}
 	

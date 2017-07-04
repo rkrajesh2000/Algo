@@ -28,23 +28,25 @@ public class NonOverlappingIntervals {
 		intervals1[2] = new Interval(3,4);
 		intervals1[3] = new Interval(1,3);	
 		intervals1[4] = new Interval(2,3);	
-		System.out.println("Number Of Interval to Remove : " + removeOverlapIntervals(intervals1));
-		System.out.print("Merged Intervals : ");
+		System.out.println("Number Of Interval to Remove removeOverlapIntervals(): " + removeOverlapIntervals(intervals1));
+		System.out.print("Merged Intervals mergeIntervals(): ");
 		displayMergeIntervals(mergeIntervals(intervals1));
 		
 		Interval[] intervals2 = new Interval[3];
 		intervals2[0] = new Interval(1,2);
 		intervals2[1] = new Interval(1,2);
 		intervals2[2] = new Interval(1,2);
-		System.out.println("Number Of Interval to Remove : " + removeOverlapIntervals(intervals2));
-		System.out.print("Merged Intervals : ");
+		System.out.println("Number Of Interval to Remove removeOverlapIntervals(): " + removeOverlapIntervals(intervals2));
+		System.out.print("Merged Intervals mergeIntervals(): ");
 		displayMergeIntervals(mergeIntervals(intervals2));
 		
-		Interval[] intervals3 = new Interval[2];
+		Interval[] intervals3 = new Interval[4];
 		intervals3[0] = new Interval(1,2);
 		intervals3[1] = new Interval(2,3);
-		System.out.println("Number Of Interval to Remove : " + removeOverlapIntervals(intervals3));
-		System.out.print("Merged Intervals : ");
+		intervals3[2] = new Interval(5,7);
+		intervals3[3] = new Interval(4,7);
+		System.out.println("Number Of Interval to Remove removeOverlapIntervals(): " + removeOverlapIntervals(intervals3));
+		System.out.print("Merged Intervals mergeIntervals(): ");
 		displayMergeIntervals(mergeIntervals(intervals3));
 	}
 	
@@ -103,12 +105,12 @@ public class NonOverlappingIntervals {
 	    for(int i=1; i < intervals.length; i++){
 	    	Interval curr = intervals[i];
 
-	    	if(curr.start >= pre.end){
+	    	if(curr.start > pre.end){
 	            result.add(pre);
 	            pre = curr;
 	    	}
 	    	else{
-	            Interval merged = new Interval(pre.start, Math.max(pre.end, curr.end));
+	    		Interval merged = new Interval(Math.min(pre.start,curr.start), Math.max(pre.end, curr.end));
 	            pre = merged;
 	    	}
 	    }

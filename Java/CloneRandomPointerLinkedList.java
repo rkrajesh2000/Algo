@@ -52,7 +52,7 @@ public class CloneRandomPointerLinkedList {
 		if (head == null)
 			return null;
 	 
-		ListNode p = head;
+		ListNode p = head; 
 
 		// copy every node and insert to list
 		while (p != null) {

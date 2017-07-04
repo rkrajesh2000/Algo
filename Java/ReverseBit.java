@@ -8,7 +8,7 @@ public class ReverseBit {
 		int n = 4;
 		System.out.println("Input number is " + n + ". After Bit revers number is " + reverseBits(n));
 		
-		n = 43261596 ;
+		n = 536870912 ;
 		System.out.println("Input number is " + n + ". After Bit revers number is " + reverseBits(n));
 		
 //		System.out.println(reverseBitsApproach2(4));

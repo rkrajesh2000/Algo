@@ -6,16 +6,19 @@ import java.util.PriorityQueue;
 public class MergeSortedArrays {
 
 	public static void main(String[] args) {
-		int[] arr1 = { 1, 3, 5, 7 };
-		int[] arr2 = { 2, 4, 6, 8 };
-		int[] arr3 = { 0, 9, 10, 11 };
+		int[] arr1 = { 1, 11, 5, 25, 95, 35, 111 };
+		int[] arr2 = { 2, 4, 84, 8, 94, 37, 15 };
+		int[] arr3 = { 1, 90, 10, 3, 91, 34, 110 };
  
 		int[] result = mergeKSortedArray(new int[][] { arr1, arr2, arr3 });
 		System.out.println("By mergeKSortedArray() with Comparable<ArrayContainer> : " + Arrays.toString(result));
 		
 		result = mergeKSortedArray(new int[][] { arr1, arr2, arr3 });
-		System.out.println("By mergeKSortedArrayAddDirectlyToQueue() : " + Arrays.toString(result));
+		System.out.println("By mergeKSortedArrayAddDirectlyToQueue() : " + Arrays.toString(result));		
+	
+		result = findTopNumbersUsingPriorityQueue(new int[][] { arr1, arr2, arr3 });		
 
+		System.out.println("By findTopNumbersUsingPriorityQueue() : " + Arrays.toString(result));	
 	}
 	
 	//This problem solved by using a heap. The time complexity is O(nlog(n)).
@@ -70,4 +73,29 @@ public class MergeSortedArrays {
  
 		return result;
 	}	
+	
+	private static int[] findTopNumbersUsingPriorityQueue(int[][] arr) {
+		//PriorityQueue is heap in Java 
+		PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+ 
+		//add arrays to heap
+		for (int[] arrInner :  arr) {
+			for(int n: arrInner){
+				if( queue.size() < 5) 
+					queue.add(n);
+				else if(queue.peek() < n ){
+					queue.add(n);
+					queue.poll();
+				}
+			}			
+		}
+ 
+		int m=0;
+		int result[] = new int[queue.size()];
+ 
+		while(!queue.isEmpty())
+			result[m++]=queue.poll();		
+ 
+		return result;
+	}
 }

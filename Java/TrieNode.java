@@ -1,7 +1,5 @@
 package Algo.Test;
 
-import java.util.HashMap;
-
 public class TrieNode {
     TrieNode[] arr;
     boolean isEnd;

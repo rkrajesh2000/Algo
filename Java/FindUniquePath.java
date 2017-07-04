@@ -114,25 +114,25 @@ public class FindUniquePath {
 		matrix[0][0] = 1;
 		
 		for(int i = 0; i < n; i++){
-		    if(obstacleGrid[i][0] == 1)
-		        matrix[i][0] = 0;
-		    else 
-		    	matrix[i][0] = (i-1) >= 0 ? matrix[i-1][0] : 1;
+		    if(obstacleGrid[i][0] != 1)
+		        matrix[i][0] = 1;
+//		    else 
+//		    	matrix[i][0] = (i-1) >= 0 ? matrix[i-1][0] : 1;
 		}
 		
 		for(int i = 0; i < m; i++){
-		    if(obstacleGrid[0][i] == 1)
-		    	matrix[0][i] = 0;
-		    else 
-		    	matrix[0][i] = (i-1) >= 0 ? matrix[0][i-1] : 1;
+		    if(obstacleGrid[0][i] != 1)
+		    	matrix[0][i] = 1;
+//		    else 
+//		    	matrix[0][i] = (i-1) >= 0 ? matrix[0][i-1] : 1;
     
 		}
 		
 		for(int i = 1; i < n; i++){
 			for(int j = 1; j < m; j++){
-				if(obstacleGrid[i][j] == 1)
-					matrix[i][j] = 0;
-				else
+				if(obstacleGrid[i][j] != 1)
+//					matrix[i][j] = 0;
+//				else
 					matrix[i][j] = matrix[i-1][j] + matrix[i][j-1];
 			}			
 		}

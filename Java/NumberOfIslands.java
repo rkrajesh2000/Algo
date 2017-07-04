@@ -44,7 +44,6 @@ public class NumberOfIslands {
 
         for (int row = 0; row < rowLength; row++)
         {
-
             for (int col= 0; col < colLength; col++)
             {
                 if (grid[row][col] == '0' || visited[row][col])
@@ -62,14 +61,13 @@ public class NumberOfIslands {
     {
         if (!shouldExplore(row, col,rowLength,colLength, grid,visited))
             return;
+        
         visited[row][col] = true;
 
         for(int i=0 ; i<4;i++)
         {
-            explore(row + xDir[i], col + yDir[i], rowLength, colLength, grid,visited);
+            explore(row + xDir[i], col + yDir[i], rowLength, colLength, grid, visited);
         }
-        
-      
     }
 
     private boolean shouldExplore(int row, int col, int rowLength, int colLength, char[][] grid, boolean[][] visited)

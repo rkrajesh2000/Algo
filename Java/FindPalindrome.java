@@ -38,7 +38,7 @@ public class FindPalindrome {
 	// Given a center, either one letter or two letter, 
 	// Find longest palindrome
 	public static String helper(String s, int begin, int end) {
-		while (begin >= 0 && end <= s.length() - 1 && s.charAt(begin) == s.charAt(end)) {
+		while (begin >= 0 && end < s.length() && s.charAt(begin) == s.charAt(end)) {
 			begin--;
 			end++;
 		}

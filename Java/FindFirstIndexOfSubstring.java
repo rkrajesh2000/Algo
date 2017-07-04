@@ -18,18 +18,12 @@ public class FindFirstIndexOfSubstring {
 	   if(mainLength < subLength)
 		   return result;
 	   
-	   for(int i =0 ;i < mainLength; i++){
+	   for(int i =0 ;i < (mainLength - subLength); i++){
 		   
 		   char cur = mainString.charAt(i);
 		   
-		   if (cur == subString.charAt(0)){
-			   if (i + subLength <= mainLength)
-			   {
-				   if ((mainString.substring(i, subLength + i).equals(subString)))
-					   return i;
-			   }
-			   else
-				   break;
+		   if ( cur == subString.charAt(0) && (mainString.substring(i, subLength + i).equals(subString)) ){
+			   return i;
 	    
 		   }
 	   }

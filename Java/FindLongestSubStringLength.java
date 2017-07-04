@@ -1,6 +1,8 @@
 package Algo.Test;
 
-import java.util.HashSet;
+import java.util.*;
+
+import Algo.Test.FindFirstNonRepeatingCharInString.Tuple;
 
 public class FindLongestSubStringLength {
 
@@ -10,8 +12,10 @@ public class FindLongestSubStringLength {
 		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("bbbbb") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("bbbbb"));
 		System.out.println("lengthOfLongestSubstring(): " + lengthOfLongestSubstring("dvdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("dvdf"));
 		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("abcedefbkokkflasdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("abcedefbkokkflasdf"));
-		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("bbbbb") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("bbbbb"));
-		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("dvdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("dvdf"));	
+		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("abcacbbdc") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("abcacbbdc"));
+		System.out.println("lengthOfLongestSubstringWithBuffer(): " + lengthOfLongestSubstringWithBuffer("dvdf") + ", valueOfLongestSubstring(): " + valueOfLongestSubstring("dvdf"));
+		System.out.println("lengthOfLongestSubstring2(): " + lengthOfLongestSubstring2("abcacbbdc") + ", valueOfLongestSubstring2(): " + valueOfLongestSubstring2("abcacbbdc"));
+		System.out.println("longestSubStringWithTwoDistinctChar() for input aabbcccc with sub string : " + longestSubStringWithTwoDistinctChar("aabbcccc"));
 	}
 
     //Test Case: "aab", "bbbbb", "dvdf"
@@ -50,7 +54,70 @@ public class FindLongestSubStringLength {
 	 
 		return result;
     }
+	
+	// O(n), abcacbbdc
+	public static int lengthOfLongestSubstring2(String s) {
+	     
+	     HashMap<Character,Integer> map  = new HashMap<Character,Integer>();
+	     
+	     int maxLen = 0;	     
+	     int left =0;
+
+	     if (s.length() == 0) 
+	    	 return 0;
+	     
+	     for(int i = 0; i< s.length(); i++) {
+	    	  
+	    	  char c = s.charAt(i);
+	    	  
+	    	  if(map.containsKey(c)) {
+		           left = Math.max(left,map.get(c) +1);	 
+		           map.replace(c, i); 
+	    	  }
+	    	  else {
+	            map.put(c,i);
+	    	  }
+	          maxLen=  Math.max(maxLen,i-left +1);
+	     }	     
+	     
+	     return  maxLen;	     
+	}
+
+	// O(n), abcacbbdc
+	public static String valueOfLongestSubstring2(String s) {
+	     
+	     HashMap<Character,Integer> map  = new HashMap<Character,Integer>();
+
+	     int startIndex= 0;
     
+	     
+	     int maxLen = 0;	     
+	     int left =0;
+
+	     if (s.length() == 0) 
+	    	 return "";
+	     
+	     for(int i = 0; i< s.length(); i++) {
+	    	  
+	    	  char c = s.charAt(i);
+	    	  
+	    	  if(map.containsKey(c)) {
+		           left = Math.max(left,map.get(c) +1);	 
+		           map.replace(c, i); 
+	    	  }
+	    	  else {
+	            map.put(c,i);
+	    	  }
+	    	  
+	    	  if(maxLen < (i-left +1)){
+	    		  startIndex = left;
+	    	  }
+	          maxLen=  Math.max(maxLen,i-left +1);
+	     }	     
+	     
+	     return  s.substring(startIndex ,(startIndex + maxLen));	     
+	}
+	
     private static int lengthOfLongestSubstringWithBuffer(String s) {
         
     	if(s==null || s.length()==0)
@@ -124,40 +191,66 @@ public class FindLongestSubStringLength {
 
         return longestOverAll.toString(); 
     }
+    /*
+     * 159
+     * Longest Substring with At Most Two Distinct Characters
+     */
+    public static String longestSubStringWithTwoDistinctChar(String s){
+
+        
+    	 if(s.length() < 1) 
+    		 return null;
+    	 
+        HashMap<Character,Integer> map = new HashMap<>();     
+        int curStart = 0;
+        int maxStart = 0;
+        int maxLen = 0;
+        char prevChar = s.charAt(0);
+        
+        map.put(s.charAt(0), 0);
+        
+        for(int i=1; i<s.length(); i++){
+        	char c = s.charAt(i);
+        	
+        	if(map.size() >= 2 && !map.containsKey(c)){
+        		
+        		curStart = map.get(s.charAt(i-1));
+       			removeAllFromMapExceptInputKey(map,s.charAt(i-1));        		
+        		map.put(c,i);     
+        	}
+        	else{
+        		
+        		if(!map.containsKey(c))
+        			map.put(c, i);
+        		
+        		if(prevChar != c && map.containsKey(c))
+        			map.put(c, i);
+        	}
+
+    		if(map.size() == 2){
+        		int len = i - curStart + 1;            		
+
+        		if(maxLen < len){
+        			maxLen = len;
+        			maxStart = curStart;
+        		}        			
+    		}        	
+    		
+        	prevChar = c;
+        }        
+
+        System.out.print("Length is " + maxLen + " for ");
+        return s.substring(maxStart, maxStart + maxLen);
+    }
     
-    //This is not working for all use cases
-    public static String valueOfLongestSubstring2(String input){
-
-        HashSet<Character> set = new HashSet<Character>();
-        StringBuffer longestOverAll = new StringBuffer();
-        StringBuffer longestTillNow = new StringBuffer();
-
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-
-            if (set.contains(c)) {
-               
-            	if (longestTillNow.length() > longestOverAll.length()) {
-                    longestOverAll = longestTillNow;
-                }
-            	
-                longestTillNow = new StringBuffer();                
-                set.clear();
-            }
-            
-            longestTillNow.append(c);
-            set.add(c);
-            
-        	if (longestTillNow.length() > longestOverAll.length()) {
-                longestOverAll = longestTillNow;
-            }            
-        }
-          	
-        if(longestOverAll.length()  == 0){
-            return input;
-        }     
-        else {
-            return longestOverAll.toString();
-        } 
-    }    
+    private static void removeAllFromMapExceptInputKey(HashMap<Character,Integer> map, char c){
+		 char keyToRemove = ' ';
+		 for (Map.Entry<Character,Integer> pair : map.entrySet()) {
+			if(c != pair.getKey()) 
+				keyToRemove = pair.getKey();
+		 }
+		 
+		 if(keyToRemove != ' ')
+			 map.remove(keyToRemove);
+    }
 }

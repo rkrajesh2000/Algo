@@ -59,7 +59,7 @@ public class PhonePadCombination {
 	 
 	public static void helper( String digits, int start, List<String> result, StringBuilder sb){
 		
-	    if(start >= digits.length()){
+	    if(start == digits.length()){
 	        result.add(sb.toString());
 	        return;
 	    }
