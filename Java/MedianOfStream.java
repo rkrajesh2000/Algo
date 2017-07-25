@@ -28,7 +28,13 @@ public class MedianOfStream {
 	    
 	    // Returns the median of current data stream
 	    public double findMedian(int num) {
-	    	addNumToHeap(num);
+
+	        maxHeap.offer(num);
+	        minHeap.offer(maxHeap.poll());
+	 
+	        if(maxHeap.size() < minHeap.size()){
+	            maxHeap.offer(minHeap.poll());
+	        }
 	    	
 	        if(maxHeap.size()==minHeap.size()){
 	            return (double)(maxHeap.peek()+(minHeap.peek()))/2;
@@ -36,13 +42,13 @@ public class MedianOfStream {
 	            return maxHeap.peek();
 	        }
 	    }	    
-	    // Adds a number into the data structure.
-	    public void addNumToHeap(int num) {
-	        maxHeap.offer(num);
-	        minHeap.offer(maxHeap.poll());
-	 
-	        if(maxHeap.size() < minHeap.size()){
-	            maxHeap.offer(minHeap.poll());
-	        }
-	    }
+//	    // Adds a number into the data structure.
+//	    public void addNumToHeap(int num) {
+//	        maxHeap.offer(num);
+//	        minHeap.offer(maxHeap.poll());
+//	 
+//	        if(maxHeap.size() < minHeap.size()){
+//	            maxHeap.offer(minHeap.poll());
+//	        }
+//	    }
 	}

@@ -58,26 +58,23 @@ public class FindLongestSubStringLength {
 	// O(n), abcacbbdc
 	public static int lengthOfLongestSubstring2(String s) {
 	     
-	     HashMap<Character,Integer> map  = new HashMap<Character,Integer>();
+	     if (s == null || s.length() == 0) 
+	    	 return 0;
 	     
+	     HashMap<Character,Integer> map  = new HashMap<Character,Integer>();	     
 	     int maxLen = 0;	     
 	     int left =0;
 
-	     if (s.length() == 0) 
-	    	 return 0;
 	     
 	     for(int i = 0; i< s.length(); i++) {
 	    	  
 	    	  char c = s.charAt(i);
 	    	  
-	    	  if(map.containsKey(c)) {
-		           left = Math.max(left,map.get(c) +1);	 
-		           map.replace(c, i); 
-	    	  }
-	    	  else {
-	            map.put(c,i);
-	    	  }
+	    	  if(map.containsKey(c)) 
+		           left = Math.max(left,map.get(c) +1);		    	  	    	  
+	    	  
 	          maxLen=  Math.max(maxLen,i-left +1);
+	          map.put(c,i);
 	     }	     
 	     
 	     return  maxLen;	     
@@ -86,36 +83,29 @@ public class FindLongestSubStringLength {
 	// O(n), abcacbbdc
 	public static String valueOfLongestSubstring2(String s) {
 	     
-	     HashMap<Character,Integer> map  = new HashMap<Character,Integer>();
-
-	     int startIndex= 0;
-    
+	     if (s == null || s.length() == 0) 
+	    	 return "";
 	     
+	     HashMap<Character,Integer> map  = new HashMap<Character,Integer>();
+	     int startIndex= 0;
 	     int maxLen = 0;	     
 	     int left =0;
-
-	     if (s.length() == 0) 
-	    	 return "";
 	     
 	     for(int i = 0; i< s.length(); i++) {
 	    	  
 	    	  char c = s.charAt(i);
 	    	  
-	    	  if(map.containsKey(c)) {
-		           left = Math.max(left,map.get(c) +1);	 
-		           map.replace(c, i); 
-	    	  }
-	    	  else {
-	            map.put(c,i);
-	    	  }
-	    	  
-	    	  if(maxLen < (i-left +1)){
+	    	  if(map.containsKey(c)) 
+		           left = Math.max(left, map.get(c) + 1);	 
+  	  
+	    	  if(maxLen < (i - left + 1))
 	    		  startIndex = left;
-	    	  }
-	          maxLen=  Math.max(maxLen,i-left +1);
+	    	  	    	  
+	          maxLen=  Math.max(maxLen, i - left + 1);
+	          map.put(c,i);
 	     }	     
 	     
-	     return  s.substring(startIndex ,(startIndex + maxLen));	     
+	     return  s.substring(startIndex , startIndex + maxLen);	     
 	}
 	
     private static int lengthOfLongestSubstringWithBuffer(String s) {
@@ -196,14 +186,13 @@ public class FindLongestSubStringLength {
      * Longest Substring with At Most Two Distinct Characters
      */
     public static String longestSubStringWithTwoDistinctChar(String s){
-
         
-    	 if(s.length() < 1) 
+    	 if(s == null || s.length() < 1) 
     		 return null;
     	 
         HashMap<Character,Integer> map = new HashMap<>();     
-        int curStart = 0;
-        int maxStart = 0;
+        int left = 0;
+        int startIndex = 0;
         int maxLen = 0;
         char prevChar = s.charAt(0);
         
@@ -214,33 +203,25 @@ public class FindLongestSubStringLength {
         	
         	if(map.size() >= 2 && !map.containsKey(c)){
         		
-        		curStart = map.get(s.charAt(i-1));
+        		left = map.get(s.charAt(i-1));
        			removeAllFromMapExceptInputKey(map,s.charAt(i-1));        		
         		map.put(c,i);     
         	}
-        	else{
-        		
-        		if(!map.containsKey(c))
-        			map.put(c, i);
-        		
-        		if(prevChar != c && map.containsKey(c))
-        			map.put(c, i);
+        	else if( !map.containsKey(c) || (prevChar != c && map.containsKey(c))){
+        		map.put(c, i);
         	}
 
-    		if(map.size() == 2){
-        		int len = i - curStart + 1;            		
-
-        		if(maxLen < len){
-        			maxLen = len;
-        			maxStart = curStart;
-        		}        			
-    		}        	
+    		if(map.size() == 2 && maxLen < (i - left + 1))
+        		startIndex = left;  	
+    		
+    		if(map.size() == 2)
+    			maxLen=  Math.max(maxLen, i - left + 1);
     		
         	prevChar = c;
         }        
 
         System.out.print("Length is " + maxLen + " for ");
-        return s.substring(maxStart, maxStart + maxLen);
+        return s.substring(startIndex, startIndex + maxLen);
     }
     
     private static void removeAllFromMapExceptInputKey(HashMap<Character,Integer> map, char c){

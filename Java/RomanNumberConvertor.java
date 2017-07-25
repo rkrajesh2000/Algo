@@ -31,8 +31,7 @@ public class RomanNumberConvertor {
 		System.out.println("Integer Number to Roman Conversion");
 	    for (int i = 1; i<= 100; i++) {
 
-	        System.out.println(i +"\t =\t "+ toRoman(i));
-	        
+	        System.out.println(i +"\t =\t "+ toRoman(i));	        
 	    }
 	}
 

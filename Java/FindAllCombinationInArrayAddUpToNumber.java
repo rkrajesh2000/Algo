@@ -31,7 +31,6 @@ public class FindAllCombinationInArrayAddUpToNumber {
         System.out.print("allPossibleCombinationAddUpToNumberWithSameNumberRepeated(): ");
         displayList(allPossibleCombinationAddUpToNumberWithSameNumberRepeated(arrayForPairs, target));        
         
-
         System.out.println();
         System.out.print("allPossibleCombinationMultiplyUpToNumber() to make 60 : ");
         displayList(allPossibleCombinationMultiplyUpToNumber(new int[]{ 2, 10, 4, 9, 6, 8, 5, 3, 11, 12}, 60));
@@ -325,8 +324,9 @@ public class FindAllCombinationInArrayAddUpToNumber {
 	}
 	
 	 /*
-	  * Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous sub array of which the sum >= s. If there isn't one, return 0 instead.
-		For example, given the array [2,3,1,2,4,3] and s = 7, the sub array [4,3] has the minimal length under the problem constraint.
+	  * Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous sub array 
+	  * of which the sum >= s. If there isn't one, return 0 instead.
+	  * For example, given the array [2,3,1,2,4,3] and s = 7, the sub array [4,3] has the minimal length under the problem constraint.
 	  */	
 	private static int findMinLengthSubArrayCombinationAddUpToNumber(int[] nums, int target){
 		
@@ -408,7 +408,7 @@ public class FindAllCombinationInArrayAddUpToNumber {
 		 }
 	 }
 	 
-	 /*
+	 /* 53
 	  * Find the contiguous sub array within an array (containing at least one number) which has the largest sum.
 		For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
 		the contiguous sub array [4,-1,2,1] has the largest sum = 6.
@@ -422,18 +422,18 @@ public class FindAllCombinationInArrayAddUpToNumber {
 			 return nums[0];
 	 
 		 int max = nums[0];
-		 int curSum = nums[0];
+		 int prevSum = nums[0];
 		 
 		 for(int i = 1; i < nums.length; i++){
 			 
-			 curSum = Math.max(nums[i], curSum + nums[i]);
-			 max = Math.max(max, curSum);
+			 prevSum = Math.max(nums[i], prevSum + nums[i]);
+			 max = Math.max(max, prevSum);
 		 }
 		 
 		 return max;
 	 }
 	 
-	 /*
+	 /* 152
 	  * Find the contiguous sub array within an array (containing at least one number) which has the largest product.
 		For example, given the array [2,3,-2,4], the contiguous sub array [2,3] has the largest product = 6.
 	  */

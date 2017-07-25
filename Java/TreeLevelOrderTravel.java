@@ -19,7 +19,7 @@ public class TreeLevelOrderTravel {
 	
 	private static void assignTreeNode(TreeNode root){
 		
-		Queue<LinkedList<TreeNode>> queue = new LinkedList<LinkedList<TreeNode>>();
+		Queue<Queue<TreeNode>> queue = new LinkedList<Queue<TreeNode>>();
 		LinkedList<TreeNode> innerQueue = new LinkedList<TreeNode>();
 		innerQueue.add(root);
 		queue.add(innerQueue);

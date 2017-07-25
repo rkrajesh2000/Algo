@@ -27,6 +27,15 @@ public class GrayCodeDisplay {
 		createSparseMatrix(matrix);
 	}
 	
+	/* 89
+	 * The gray code is a binary numeral system where two successive values differ in only one bit.
+		Given a non-negative integer n representing the total number of bits in the code, print the sequence of gray code. 
+		A gray code sequence must begin with 0.	For example, given n = 2, return [0,1,3,2]. Its gray code sequence is:
+		00 - 0
+		01 - 1
+		11 - 3
+		10 - 2
+	 */
 	public static List<Integer> grayCode(int n) {
 	    if(n==0){
 	        List<Integer> list = new ArrayList<Integer>();
@@ -71,7 +80,7 @@ public class GrayCodeDisplay {
 
 		while(n > 0){
 			list.add(n & 1 );	// This is same as (n%2)	
-			n >>= 1;			// This is same as (n/2)
+			n = n >> 1;			// This is same as (n/2)
 		}
 		
 		// There might be extra bit in result, so add one extra bit
@@ -118,14 +127,14 @@ public class GrayCodeDisplay {
 		}
 		
 		int[][] sparseMatrix = new int[3][size];
-		int k = 0;
+		int col = 0;
 		for(int i = 0; i < matrix.length; i++){
 			for(int j = 0; j < matrix[0].length; j++){
 				if(matrix[i][j] != 0){
-					sparseMatrix[0][k] = i;
-					sparseMatrix[1][k] = j;
-					sparseMatrix[2][k] = matrix[i][j];
-					++k;
+					sparseMatrix[0][col] = i;
+					sparseMatrix[1][col] = j;
+					sparseMatrix[2][col] = matrix[i][j];
+					++col;
 				}
 			}
 		}

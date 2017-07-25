@@ -66,6 +66,7 @@ public class SortLinkList {
 			if (countHalf == middle) {
 				p2.next = null;
 				r = next;
+				break;
 			}
 			p2 = next;
 		}
@@ -74,50 +75,79 @@ public class SortLinkList {
 		ListNode h1 = mergeSortList(l);
 		ListNode h2 = mergeSortList(r);
  
-		// merge together
-		ListNode merged = merge(h1, h2);
- 
-		return merged;
+		// merge together and return
+		return merge(h1, h2);
 	}
 	
-	public static ListNode merge(ListNode l, ListNode r) {
-		ListNode p1 = l;
-		ListNode p2 = r;
- 
-		ListNode fakeHead = new ListNode(100);
-		ListNode pNew = fakeHead;
- 
-		while (p1 != null || p2 != null) {
- 
-			if (p1 == null) {
-				pNew.next = new ListNode(p2.val);
-				p2 = p2.next;
-				pNew = pNew.next;
-			} else if (p2 == null) {
-				pNew.next = new ListNode(p1.val);
-				p1 = p1.next;
-				pNew = pNew.next;
-			} else {
-				if (p1.val < p2.val) {
-
-					pNew.next = new ListNode(p1.val);
-					p1 = p1.next;
-					pNew = pNew.next;
-				} else if (p1.val == p2.val) {
-					pNew.next = new ListNode(p1.val);
-					pNew.next.next = new ListNode(p1.val);
-					pNew = pNew.next.next;
-					p1 = p1.next;
-					p2 = p2.next;
- 
-				} else {
-					pNew.next = new ListNode(p2.val);
-					p2 = p2.next;
-					pNew = pNew.next;
-				}
-			}
-		}
-
-		return fakeHead.next;
+	public static ListNode merge(ListNode l1, ListNode l2) {
+		
+        ListNode head = new ListNode(0);
+        ListNode p = head;
+        
+        while (l1!=null||l2!=null)
+        {
+            if (l1!=null && l2!=null) {
+                if(l1.val < l2.val){
+                    p.next = l1;
+                    l1 = l1.next;
+                }
+                else {
+                    p.next = l2;
+                    l2 = l2.next;
+                }
+                p = p.next;
+            }
+            else if(l1!=null)
+            {
+                p.next = l1;
+                break;
+            }
+            else if(l2!=null)
+            {
+                p.next = l2; 
+                break;
+            }
+        }
+        
+        return head.next;		
+        
+//		ListNode p1 = l;
+//		ListNode p2 = r;
+// 
+//		ListNode fakeHead = new ListNode(0);
+//		ListNode pNew = fakeHead;
+// 
+//		while (p1 != null || p2 != null) {
+// 
+//			if (p1 == null) {
+//				pNew.next = new ListNode(p2.val);
+//				p2 = p2.next;
+//				pNew = pNew.next;
+//			} else if (p2 == null) {
+//				pNew.next = new ListNode(p1.val);
+//				p1 = p1.next;
+//				pNew = pNew.next;
+//			} else {
+//				if (p1.val < p2.val) {
+//
+//					pNew.next = new ListNode(p1.val);
+//					p1 = p1.next;
+//					pNew = pNew.next;
+//				} else if (p1.val == p2.val) {
+//					pNew.next = new ListNode(p1.val);
+//					pNew.next.next = new ListNode(p1.val);
+//					pNew = pNew.next.next;
+//					p1 = p1.next;
+//					p2 = p2.next;
+// 
+//				} else {
+//					pNew.next = new ListNode(p2.val);
+//					p2 = p2.next;
+//					pNew = pNew.next;
+//				}
+//			}
+//		}
+//
+//		return fakeHead.next;
 	}	
 }

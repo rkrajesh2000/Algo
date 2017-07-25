@@ -21,7 +21,8 @@ public class FindUniquePath {
 				  //{7,8,9}
 				};
 			
-				System.out.println("minPathSum(): Minimum paths sum : " + minPathSum(grid2));		
+		System.out.println("minPathSum(): Minimum paths sum : " + minPathSum(grid2));
+		System.out.println("minPathSumByDFS(): Minimum paths sum : " + minPathSumByDFS(grid2));
 	}
 	
 	private static void printMatrix(int[][] matrix){
@@ -90,6 +91,10 @@ public class FindUniquePath {
 	    return 0;
 	}
 	
+	/*
+	 * 63
+	 * Unique Paths with obstacle 
+	 */
 	private static int uniquePathsWithObstacle(int[][] obstacleGrid)
 	{
 	    if(obstacleGrid==null||obstacleGrid.length==0)
@@ -101,7 +106,7 @@ public class FindUniquePath {
 		if(n == 0 && m == 0)
 			return 0;
 		
-		if(n == 1 && m == 1 && obstacleGrid[0][0] == 1)
+		if((n == 1 && m == 1) && obstacleGrid[0][0] == 1)
 		    return 0;
 		    
 		if(n == 1 && m == 1 && obstacleGrid[0][0] != 1)
@@ -113,26 +118,26 @@ public class FindUniquePath {
 		int[][] matrix = new int[n][m];
 		matrix[0][0] = 1;
 		
-		for(int i = 0; i < n; i++){
-		    if(obstacleGrid[i][0] != 1)
-		        matrix[i][0] = 1;
-//		    else 
-//		    	matrix[i][0] = (i-1) >= 0 ? matrix[i-1][0] : 1;
+		for(int i = 1; i < n; i++){
+		    if(obstacleGrid[i][0] == 1)
+		        matrix[i][0] = 0;
+		    else 
+		    	matrix[i][0] = (i-1) >= 0 ? matrix[i-1][0] : 1;
 		}
 		
-		for(int i = 0; i < m; i++){
-		    if(obstacleGrid[0][i] != 1)
-		    	matrix[0][i] = 1;
-//		    else 
-//		    	matrix[0][i] = (i-1) >= 0 ? matrix[0][i-1] : 1;
+		for(int i = 1; i < m; i++){
+		    if(obstacleGrid[0][i] == 1)
+		    	matrix[0][i] = 0;
+		    else 
+		    	matrix[0][i] = (i-1) >= 0 ? matrix[0][i-1] : 1;
     
 		}
 		
 		for(int i = 1; i < n; i++){
 			for(int j = 1; j < m; j++){
-				if(obstacleGrid[i][j] != 1)
-//					matrix[i][j] = 0;
-//				else
+				if(obstacleGrid[i][j] == 1)
+					matrix[i][j] = 0;
+				else
 					matrix[i][j] = matrix[i-1][j] + matrix[i][j-1];
 			}			
 		}
@@ -142,6 +147,12 @@ public class FindUniquePath {
 		return matrix[n-1][m-1];
 	}	
 
+	/*
+	 * 64
+	 * Minimum Path Sum
+	 * Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right 
+	 * which minimizes the sum of all numbers along its path.
+	 */
 	public static int minPathSum(int[][] grid) {
 		
 		if(grid == null || grid.length == 0)
@@ -178,4 +189,36 @@ public class FindUniquePath {
 	    
 	    return matrix[m-1][n-1];
 	}
+	
+	/*
+	 * 64
+	 * Minimum Path Sum
+	 * Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right 
+	 * which minimizes the sum of all numbers along its path.
+	 */	
+	private static int minPathSumByDFS(int[][] grid) {
+	    return dfs(0,0,grid);
+	}
+	 
+	private static int dfs(int i, int j, int[][] grid){
+	    if(i==grid.length-1 && j==grid[0].length-1){
+	        return grid[i][j];
+	    }
+	 
+	    if(i<grid.length-1 && j<grid[0].length-1){
+	        int r1 = grid[i][j] + dfs(i+1, j, grid);
+	        int r2 = grid[i][j] + dfs(i, j+1, grid);
+	        return Math.min(r1,r2);
+	    }
+	 
+	    if(i<grid.length-1){
+	        return grid[i][j] + dfs(i+1, j, grid);
+	    }
+	 
+	    if(j<grid[0].length-1){
+	        return grid[i][j] + dfs(i, j+1, grid);
+	    }
+	 
+	    return 0;
+	}	
 }

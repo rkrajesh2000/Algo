@@ -1,18 +1,19 @@
 package Algo.Test;
 
+import java.util.*;
+
 public class ReverseBit {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		int n = 4;
-		System.out.println("Input number is " + n + ". After Bit revers number is " + reverseBits(n));
+		System.out.println("Input number is " + n + ". After Bit revers number is reverseBits():" + reverseBits(n));
+		//System.out.println("Input number is " + n + ". After Bit revers number is reverseBitsApproach2()(Not Working): " + reverseBitsApproach2(n));
 		
 		n = 536870912 ;
-		System.out.println("Input number is " + n + ". After Bit revers number is " + reverseBits(n));
-		
-//		System.out.println(reverseBitsApproach2(4));
-//		System.out.println(reverseBitsApproach2(43261596));
+		System.out.println("Input number is " + n + ". After Bit revers number is reverseBits():" + reverseBits(n));
+		//System.out.println("Input number is " + n + ". After Bit revers number is reverseBitsApproach2()(Not Working): " + reverseBitsApproach2(n));
 	}
 
 	private static int reverseBits(int n) {
@@ -38,23 +39,30 @@ public class ReverseBit {
 		return num;
 	}
 	
-	//Not Correct
+	//Not working
 	private static int reverseBitsApproach2(int n) {
 		int x = 0;
-		int y = 65536;
 		int num = n;
+		List<Integer> list = new ArrayList<>();
 		
-		for(int i = 0; i < 32; i++)	{
-			
-			int r = num & 1;
+		while(num > 0){
+			list.add(num & 1);
 			num = num >> 1;
-			x = x >> 1;
-			
-			if( r == 1)				
-				x = x | y;
+		}
 
+		while(list.size() % 4  != 0){
+			list.add(0, 0);
 		}
 		
+		int size = list.size();
+		if(size < 32){
+			for(int i = 0; i < 32 - size ; i++)	{
+				list.add(0);
+			}
+		}
+		for(int i=0; i < list.size(); i++)	
+			x = x + (list.get(i) * (int)Math.pow((double)2, (double)(list.size()-1-i)));
+				
 		return x;
 	}
 }

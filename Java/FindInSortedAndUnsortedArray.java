@@ -155,7 +155,7 @@ public class FindInSortedAndUnsortedArray {
 				
 		int len = nums.length;
        
-		HashSet<Integer> set = new HashSet<Integer>();
+		//HashSet<Integer> set = new HashSet<Integer>();
 
 		for(int i=0; i < len; i++){
 			while (nums[i] != i+1) {				

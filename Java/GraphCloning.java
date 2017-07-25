@@ -57,16 +57,16 @@ public class GraphCloning {
 		if(node == null)
 			return node;
 		
-		HashMap<GraphNode,GraphNode> map = new HashMap<GraphNode,GraphNode>();
-		LinkedList<GraphNode> queue = new LinkedList<GraphNode>();
+		HashMap<GraphNode,GraphNode> map = new HashMap<>();
+		Queue<GraphNode> queue = new LinkedList<>();
 		GraphNode head = new GraphNode(node.val);
 		
 		map.put(node, head); //Map key is current node and values are new cloned or created node.
-		queue.push(node);
+		queue.offer(node);
 		
 		while(!queue.isEmpty()){
 			
-			GraphNode currNode = queue.pop();
+			GraphNode currNode = queue.poll();
 			GraphNode currClonedNode = map.get(currNode);
 			ArrayList<GraphNode> currNbrList = currNode.neighbors;
 			
@@ -81,7 +81,7 @@ public class GraphCloning {
 					map.put(eachNbrNode, newNode);
 					//Get the value (previously cloned node) of current node and add newly created (cloned) node as neighbor. 
 					currClonedNode.neighbors.add(newNode);  
-					queue.push(eachNbrNode);					
+					queue.offer(eachNbrNode);					
 				}
 				else{
 					

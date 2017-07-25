@@ -33,7 +33,7 @@ public class ValidParentheses {
 		map.put('[', ']');
 		map.put('{', '}');
 	 
-		Stack<Character> stack = new Stack<Character>();
+		Stack<Character> stack = new Stack<>();
 	 
 		for (int i = 0; i < s.length(); i++) {
 			char curr = s.charAt(i);

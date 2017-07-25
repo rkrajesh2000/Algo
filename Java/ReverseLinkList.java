@@ -138,10 +138,10 @@ public class ReverseLinkList {
 	    p1.next = second.next;
 	 
 	    while(p1!=null && p2!=null){
-	        ListNode t = p2.next;
+	        ListNode temp = p2.next;
 	        p2.next = p1;
 	        p1 = p2;
-	        p2 = t;	        
+	        p2 = temp;	        
 	    }
 	 
 	    //connect to previous part

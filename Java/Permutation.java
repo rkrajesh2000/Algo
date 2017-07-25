@@ -163,7 +163,7 @@ public class Permutation {
 	}
 	 
 	 private static boolean isDuplicateExists(int[] nums, int start, int end) {
-		for (int i = start; i <= end-1; i++) {
+		for (int i = start; i < end; i++) {
 			if (nums[i] == nums[end]) {
 				return false;
 			}

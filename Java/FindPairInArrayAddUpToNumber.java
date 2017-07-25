@@ -197,7 +197,7 @@ public class FindPairInArrayAddUpToNumber {
 	                }else if(nums[i]+nums[j]+nums[k]+nums[l]>target){
 	                    l--;
 	                }else{
-	                    List<Integer> list = new ArrayList<Integer>();
+	                    List<Integer> list = new ArrayList<>();
 	                    list.add(nums[i]);
 	                    list.add(nums[j]);
 	                    list.add(nums[k]);

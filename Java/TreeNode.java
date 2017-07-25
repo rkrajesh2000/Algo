@@ -5,7 +5,7 @@ public class TreeNode {
     TreeNode left;
     TreeNode right;
     TreeNode parent;
-
+    String value;
     public TreeNode()
     {
 
@@ -14,4 +14,9 @@ public class TreeNode {
     {
         this.val = n;
     }
+    
+    public TreeNode(String v)
+    {
+        this.value = v;
+    }    
 }

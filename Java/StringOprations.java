@@ -8,8 +8,11 @@ public class StringOprations {
 		System.out.print("anagramGroup() : ");
 		displayList(anagramGroup(arr));
 		System.out.println();		
-		System.out.print("findMinmumWindowSubString() ADOBECODEBANC : " + findMinmumWindowSubString("abc","a"));
-		//System.out.print("findMinmumWindowSubString() ADOBECODEBANC : " + findMinmumWindowSubString("ADOBECODEBANC","ABC"))	;	
+		//System.out.print("findMinmumWindowSubString() ADOBECODEBANC : " + findMinmumWindowSubString("abc","a"));
+		System.out.println("findMinmumWindowSubString() ADOBECODEBANC : " + findMinmumWindowSubString("ADOBECODEBANC","ABC"))	;	
+		System.out.println("isMatchWildcardPattern() ADOBECODEBANC : " + isMatchWildcardPattern("aa", "a*"))	;
+		System.out.println("isMatchWildcardPattern() ADOBECODEBANC : " + isMatchWildcardPattern("aab", "c*a*b"))	;
+		
 	}
 	
 	private static void displayList(List<List<String>> inputList){
@@ -78,78 +81,133 @@ public class StringOprations {
    
     public static String findMinmumWindowSubString(String s, String t) {
 
-    		if(s == null || t == null || s.length() < t.length())  
-    			return "";
-    		
-    		if(s.equals(t))
-    			return t;
-    		
-            HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+		if(s == null || t == null || s.length() < t.length())  
+			return "";
+		
+		if(s.equals(t))
+			return t;
+		
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 
-            for(char c : t.toCharArray())//initialize hash map here
+        for(char c : t.toCharArray())//initialize hash map here
+        {
+            if (map.containsKey(c))
             {
-                if (map.containsKey(c))
-                {
-                    map.replace(c, map.get(c) + 1);
-                }
-                else
-                {
-                    map.put(c, 1);
-                }
+                map.replace(c, map.get(c) + 1);
             }
-
-            int begin = 0, end = 0;  //two pointers, one point to tail and one  head            
-            int counter = t.length(); //  # Works as a counter of how many chars still need to be included in a window
-            int min = Integer.MAX_VALUE;
-            int minStartIndex = 0;
-
-            while (end < s.length())
+            else
             {
-               //If element found in hash
-                if (map.containsKey(s.charAt(end)))
-                {
-                   // Then we decreased the counter, if this char is must to be included                     
-                    if (map.get(s.charAt(end)) > 0) 
-                    	counter--;
-                    
-                    //decrement counter it may be negative when more than desired character in s
-                     map.put(s.charAt(end), map.get(s.charAt(end)) - 1);                                        
-                }   
+                map.put(c, 1);
+            }
+        }
+
+        int begin = 0, end = 0;  //two pointers, one point to tail and one  head            
+        int counter = t.length(); //  # Works as a counter of how many chars still need to be included in a window
+        int min = Integer.MAX_VALUE;
+        int minStartIndex = 0;
+
+        while (end < s.length())
+        {
+        	char charEnd = s.charAt(end);
+           //If element found in hash map
+            if (map.containsKey(charEnd))
+            {
+               // Then we decreased the counter, if this char is must to be included                     
+                if (map.get(charEnd) > 0) 
+                	counter--;
                 
-               // If the current window has all the desired chars
-                while (counter == 0)
+                //decrement counter it may be negative when more than desired character in s
+                 map.put(charEnd, map.get(charEnd) - 1);                                        
+            }   
+            
+           // If the current window has all the desired chars
+            while (counter == 0)
+            {
+               // See if this window is smaller
+                if (end - begin + 1 < min)
                 {
-                   // See if this window is smaller
-                    if (end - begin + 1 < min)
-                    {
-                        min = end - begin+1;
-                        minStartIndex = begin;
-                    }
-                    
-                   // if s[begin] is desired, we need to update the hash_map value and the counter
-                    
-                    if (map.containsKey(s.charAt(begin)))
-                    {
-
-                        map.put(s.charAt(begin), map.get(s.charAt(begin)) + 1);
-                        
-                       //increment counter if we jump over one character while back tracking start.
-
-                        if (map.get(s.charAt(begin)) > 0)
-                        {
-                            counter++;
-                        }
-                    }
-
-                       // Move start forward to find a smaller window
-                    begin++;
+                    min = end - begin + 1;
+                    minStartIndex = begin;
                 }
-                //Move end forward to find another valid window
-                end++;
+                
+                char charBegin = s.charAt(begin);
+                
+               // if s[begin] is desired, we need to update the hash map value and the counter                    
+                if (map.containsKey(charBegin))
+                {
+                    map.put(charBegin, map.get(charBegin) + 1);
+                    
+                   //increment counter if we jump over one character while back tracking start.
+                    if (map.get(charBegin) > 0)
+                    {
+                        counter++;
+                    }
+                }
+
+                // Move start forward to find a smaller window
+                begin++;
             }
             
-//            if(minStartIndex == 0)
-//            	end--;
-            return min == Integer.MAX_VALUE ? "" : s.substring(minStartIndex, minStartIndex + min);
-        }    
+            //Move end forward to find another valid window
+            end++;
+        }
+        
+        return min == Integer.MAX_VALUE ? "" : s.substring(minStartIndex, minStartIndex + min);
+    }
+    
+    /* 44
+     * Implement wildcard pattern matching with support for '?' and '*'.
+		'?' Matches any single character.
+		'*' Matches any sequence of characters (including the empty sequence).		
+		The matching should cover the entire input string (not partial).		
+		
+		Some examples:
+		isMatch("aa","a") ? false
+		isMatch("aa","aa") ? true
+		isMatch("aaa","aa") ? false
+		isMatch("aa", "*") ? true
+		isMatch("aa", "a*") ? true
+		isMatch("ab", "?*") ? true
+		isMatch("aab", "c*a*b") ? false
+     */
+    public static boolean isMatchWildcardPattern(String s, String p) {
+        
+        int start = 0;        
+        int end =  s.length()-1;
+        int left=0;
+        int right = p.length()-1;
+        int starIndex = -1;
+        int match = 0;
+        
+        while(start <=end)            
+        {         
+            if(left <=right && (s.charAt(start) == p.charAt(left) || p.charAt(left) == '?'))
+            {
+                start++;
+                left++;                
+            }
+            else if(left <=right && p.charAt(left) =='*' )
+            {
+               starIndex = left;
+               match = start;
+               left++;                
+            }
+            else if(starIndex !=-1)
+            {
+               left = starIndex + 1;
+               match++;
+               start = match;
+            }
+            else            
+                return false;            
+        }
+        
+        //Remaining string
+        while(left<=right && p.charAt(left)=='*')
+        {
+            left++;
+        }
+        
+        return left == p.length();  
+    }    
 }

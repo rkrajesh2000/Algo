@@ -11,8 +11,8 @@ public class MazeExitPath {
         int maze[][] = {
                 {1, 0, 1, 1, 1, 1},
                 {1, 0, 1, 0, 1, 1},
-                {1, 0, 1, 1, 1, 1},
-                {1, 0, 1, 1, 1, 1},
+                {1, 0, 1, 0, 1, 1},
+                {1, 0, 1, 0, 1, 1},
                 {1, 1, 1, 0, 1, 1}
                 		};
 
@@ -120,7 +120,7 @@ public class MazeExitPath {
             else if (exitPathShortestUtil(maze, x - 1, y , sol, n, m))
                 return true; 
             /* Moving up and left direction*/
-            else if (exitPathShortestUtil(maze, x - 1, y - 1 , sol, n, m))
+            else if (exitPathShortestUtil(maze, x, y - 1 , sol, n, m))
                 return true;            
             
             /* If none of the above movements work then
@@ -210,16 +210,16 @@ public class MazeExitPath {
         }
  
         // Check if maze[x][y] is valid
-        if (isValidIndex(maze, x, y, n, m) == true)
+        if (isValidIndex(maze, x, y, n, m))
         {
             // mark x,y as part of solution path
             sol[x][y] = 1;
  
             /* Moving up and left direction*/
-            if (exitPathLongestUtil(maze, x - 1, y - 1 , sol, n, m))
+            if (exitPathLongestUtil(maze, x - 1, y , sol, n, m))
                 return true; 
             /* Moving up in straight direction*/
-            else if (exitPathLongestUtil(maze, x - 1, y , sol, n, m))
+            else if (exitPathLongestUtil(maze, x, y - 1 , sol, n, m))
                 return true;   
             /* Move forward in x direction. Moving down */
             else if (exitPathLongestUtil(maze, x + 1, y, sol, n, m))

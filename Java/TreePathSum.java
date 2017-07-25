@@ -31,8 +31,8 @@ public class TreePathSum {
 			System.out.println("By hasPathSumBFS(): Tree Node doesn't have path to add number " + sumNum);
 		
 		
-		System.out.print("By treePathSumDFS(): Tree Nodes has path to add up to number " + sumNum + " : ");	
-        for (List<Integer> list : treePathSumDFS(root,sumNum)) {
+		System.out.print("By treePathSumListDFS(): Tree Nodes has path to add up to number " + sumNum + " : ");	
+        for (List<Integer> list : treePathSumListDFS(root,sumNum)) {
         	System.out.print("[");
         	
         	int counter = 0;
@@ -48,9 +48,25 @@ public class TreePathSum {
         }
 	}
 
+	/* 112
+	 * Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up 
+	 * all the values along the path equals the given sum.
+		For example:
+		Given the below binary tree and sum = 22,
+		              5
+		             / \
+		            4   8
+		           /   / \
+		          11  13  4
+		         /  \      \
+		        7    2      1
+		return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+	 */
 	private static boolean hasPathSumDFS(TreeNode root, int sum) {
+		
 		if (root == null)
 			return false;
+		
 		if (root.val == sum && (root.left == null && root.right == null))
 			return true;
 	 
@@ -90,35 +106,35 @@ public class TreePathSum {
         return false;
     }
 	
-	private static List<List<Integer>> treePathSumDFS(TreeNode root, int sum) {
+	private static List<LinkedList<Integer>> treePathSumListDFS(TreeNode root, int sum) {
 		
-	    List<List<Integer>> result = new ArrayList<List<Integer>>();
+	    List<LinkedList<Integer>> result = new ArrayList<>();
 	    if(root == null) 
 	        return result;
 	 
-	    List<Integer> list = new ArrayList<Integer>();
+	    LinkedList<Integer> list = new LinkedList<>();
 	    list.add(root.val);
 	    dfs(root, sum-root.val, result, list);
 	    return result;
 	}
 	 
-	private static void dfs(TreeNode node, int sum, List<List<Integer>> result, List<Integer> list){
+	private static void dfs(TreeNode node, int sum, List<LinkedList<Integer>> result, LinkedList<Integer> list){
 	    if(node.left==null && node.right==null && sum==0){
-	        result.add(new ArrayList<Integer>(list));
+	        result.add(new LinkedList<Integer>(list));
 	    }
 	 
 	    //Search left path
 	    if(node.left != null){
 	        list.add(node.left.val);
 	        dfs(node.left, sum - node.left.val, result, list);
-	        list.remove(list.size()-1);
+	        list.removeLast();
 	    }
 	 
 	  //Search right path
 	    if(node.right!=null){
 	        list.add(node.right.val);
 	        dfs(node.right, sum - node.right.val, result, list);
-	        list.remove(list.size()-1);
+	        list.removeLast();
 	    }
 	}	
 }

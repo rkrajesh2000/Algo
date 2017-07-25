@@ -4,8 +4,6 @@ import java.util.*;
 
 public class SearchWord {
 
-	static boolean[][] visited;
-	
 	public static class TrieWordNode {
 		TrieWordNode[] next;
 	    String trieWord;
@@ -60,7 +58,8 @@ public class SearchWord {
 
 	    for (int i=0; i<board.length; i++) {
 	    	for (int j=0; j < board[i].length; j++) {
-	    		if (exist(board, i, j, word, 0)) return true;
+	    		if (exist(board, i, j, word, 0)) 
+	    			return true;
 	    	}
 	    }
 	    
@@ -95,7 +94,6 @@ public class SearchWord {
         HashSet<String> set = new HashSet<String>();
                 
         for(String word: words){
-            visited = new boolean[board.length][board[0].length];
             for (int i=0; i<board.length; i++) {
             	for (int j=0; j<board[i].length; j++) {
             		if (exist(board, i, j, word, 0) && !set.contains(word)) {
@@ -113,7 +111,7 @@ public class SearchWord {
     private static List<String> findWordsInMatrixByTries(char[][] board, String[] words) {
         
         List<String> list = new ArrayList<>();
-        TrieWordNode trie = getTries(words);
+        TrieWordNode trie = buildTries(words);
 
         for (int i=0; i<board.length; i++) {
         	for (int j=0; j<board[i].length; j++) {
@@ -124,7 +122,7 @@ public class SearchWord {
         return list;
     }
     
-    private static TrieWordNode getTries(String[] words){
+    private static TrieWordNode buildTries(String[] words){
     	
     	TrieWordNode trie = new TrieWordNode();
         
